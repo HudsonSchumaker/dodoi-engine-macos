@@ -19,19 +19,37 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 #include "Main.h"
+#include "TitleScreen.h"
+#include "SplashScreen.h"
+#include "engine/gfx/Gfx.h"
+#include "engine/sfx/Sfx.h"
+#include "engine/core/AssetManager.h"
+#include "engine/ecs/EntityManager.h"
+#include "engine/core/SceneManager.h"
 
 int main(int argc, char* argv[]) {
     setUp();
+
+    SceneManager::getInstance()->addScene("SplashScreen", std::make_unique<SplashScreen>());
+    SceneManager::getInstance()->addScene("TitleScreen", std::make_unique<TitleScreen>());
+    SceneManager::getInstance()->loadSceneAsync("SplashScreen");
+
     quit();
     return 0;
 }
 
 void setUp() {
-
+    Gfx::getInstance()->setGfxContext();
+    Sfx::getInstance()->setSfxContext();
+    AssetManager::getInstance()->load();
+    EntityManager::getInstance();
 }
 
 void quit() {
-
+    delete Gfx::getInstance();
+    delete Sfx::getInstance();
+    delete AssetManager::getInstance();
+    delete EntityManager::getInstance();
+    SDL_Quit();
 }
