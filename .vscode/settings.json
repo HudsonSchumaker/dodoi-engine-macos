@@ -76,5 +76,6 @@
         "__verbose_abort": "cpp",
         "bit": "cpp",
         "thread": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

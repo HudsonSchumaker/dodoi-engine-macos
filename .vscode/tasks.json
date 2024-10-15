@@ -6,9 +6,10 @@
             "command": "/usr/bin/clang++",
             "args": [
                 "-Wall",
+                "-O3",
                 "-std=c++17",
-                "-I/opt/homebrew/include",
-                "-L/opt/homebrew/lib",
+                "-I/usr/local/opt/sdl2/include",
+                "-L/usr/local/opt/sdl2/lib",
                 "-lSDL2",
                 "-lSDL2_gfx",
                 "-lSDL2_ttf", 
@@ -17,13 +18,13 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${workspaceFolder}/src/*.cpp",
-                "${workspaceFolder}/src/core/*.cpp",
-                "${workspaceFolder}/src/ecs/*.cpp",
-                "${workspaceFolder}/src/ecs/system/*.cpp",
-                "${workspaceFolder}/src/gfx/*.cpp",
-                "${workspaceFolder}/src/io/*.cpp",
-                "${workspaceFolder}/src/physics/*.cpp",
-                "${workspaceFolder}/src/sfx/*.cpp",
+                "${workspaceFolder}/src/engine/core/*.cpp",
+                "${workspaceFolder}/src/engine/ecs/*.cpp",
+                "${workspaceFolder}/src/engine/ecs/system/*.cpp",
+                "${workspaceFolder}/src/engine/gfx/*.cpp",
+                "${workspaceFolder}/src/engine/math/*.cpp",
+                "${workspaceFolder}/src/engine/io/*.cpp",
+                "${workspaceFolder}/src/engine/sfx/*.cpp",
                 "-o",
                 "${workspaceFolder}/build/engine"
             ],
@@ -31,7 +32,7 @@
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
-                "$gcc"
+                "$clang"
             ],
             "group": {
                 "kind": "build",
