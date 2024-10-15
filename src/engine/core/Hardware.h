@@ -85,16 +85,16 @@ public:
 
 	static int getThreadNumber(int size) {
 		int cpuCount = getCpuCount();
-		if (size < 101) { return 1; }
-		if (size < 201) { return std::min(2, cpuCount); }
-		if (size < 301) { return std::min(3, cpuCount); }
-		if (size < 401) { return std::min(4, cpuCount); }
-		if (size < 501) { return std::min(5, cpuCount); }
-		if (size < 601) { return std::min(6, cpuCount); }
-		if (size < 701) { return std::min(7, cpuCount); }
-		if (size < 801) { return std::min(8, cpuCount); }
-		if (size < 901) { return std::min(9, cpuCount); }
-		if (size < 1001) { return std::min(10, cpuCount); }
+		if (size < 1001) { return 1; }
+		if (size < 2001) { return std::min(2, cpuCount); }
+		if (size < 3001) { return std::min(3, cpuCount); }
+		if (size < 4001) { return std::min(4, cpuCount); }
+		if (size < 5001) { return std::min(5, cpuCount); }
+		if (size < 6001) { return std::min(6, cpuCount); }
+		if (size < 7001) { return std::min(7, cpuCount); }
+		if (size < 8001) { return std::min(8, cpuCount); }
+		if (size < 9001) { return std::min(9, cpuCount); }
+		if (size < 10001) { return std::min(10, cpuCount); }
 		return cpuCount;
  	}
 };

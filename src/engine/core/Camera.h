@@ -39,5 +39,5 @@ public:
 		this->h = h;
 	}
 
-	~Camera() {}
+	~Camera() = default;
 };
