@@ -188,3 +188,68 @@ SDL_Color Color::getGold() {
     SDL_Color gold = { 255, 215, 0, 255 };
     return gold;
 }
+
+SDL_Color Color::getBeige() {
+    SDL_Color beige = { 245, 245, 220, 255 };
+    return beige;
+}
+
+SDL_Color Color::getCoral() {
+    SDL_Color coral = { 255, 127, 80, 255 };
+    return coral;
+}
+
+SDL_Color Color::getCrimson() {
+    SDL_Color crimson = { 220, 20, 60, 255 };
+    return crimson;
+}
+
+SDL_Color Color::getIndigo() {
+    SDL_Color indigo = { 75, 0, 130, 255 };
+    return indigo;
+}
+
+SDL_Color Color::getIvory() {
+    SDL_Color ivory = { 255, 255, 240, 255 };
+    return ivory;
+}
+
+SDL_Color Color::getKhaki() {
+    SDL_Color khaki = { 240, 230, 140, 255 };
+    return khaki;
+}
+
+SDL_Color Color::getLavender() {
+    SDL_Color lavender = { 230, 230, 250, 255 };
+    return lavender;
+}
+
+SDL_Color Color::getMint() {
+    SDL_Color mint = { 189, 252, 201, 255 };
+    return mint;
+}
+
+SDL_Color Color::getPeach() {
+    SDL_Color peach = { 255, 218, 185, 255 };
+    return peach;
+}
+
+SDL_Color Color::getPlum() {
+    SDL_Color plum = { 221, 160, 221, 255 };
+    return plum;
+}
+
+SDL_Color Color::getSalmon() {
+    SDL_Color salmon = { 250, 128, 114, 255 };
+    return salmon;
+}
+
+SDL_Color Color::getTurquoise() {
+    SDL_Color turquoise = { 64, 224, 208, 255 };
+    return turquoise;
+}
+
+SDL_Color Color::getViolet() {
+    SDL_Color violet = { 238, 130, 238, 255 };
+    return violet;
+}

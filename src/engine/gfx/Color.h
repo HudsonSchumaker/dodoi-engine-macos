@@ -252,4 +252,112 @@ public:
     * @return An SDL_Color representing gold.
     */
     static SDL_Color getGold();
+
+    /**
+     * @brief Returns an SDL_Color representing beige.
+     * @return An SDL_Color representing beige.
+     */
+    static SDL_Color getBeige();
+
+    /**
+     * @brief Returns an SDL_Color representing coral.
+     * @return An SDL_Color representing coral.
+     */
+    static SDL_Color getCoral();
+   
+    /**
+     * @brief Returns an SDL_Color representing crimson.
+     * @return An SDL_Color representing crimson.
+     */
+    static SDL_Color getCrimson();
+    
+    /**
+     * @brief Returns an SDL_Color representing indigo.
+     * @return An SDL_Color representing indigo.
+     */
+    static SDL_Color getIndigo();
+    
+    /**
+     * @brief Returns an SDL_Color representing ivory.
+     * @return An SDL_Color representing ivory.
+     */
+    static SDL_Color getIvory();
+
+    /**
+     * @brief Returns an SDL_Color representing khaki.
+     * @return An SDL_Color representing khaki.
+     */
+    static SDL_Color getKhaki();
+   
+    /**
+     * @brief Returns an SDL_Color representing mint.
+     * @return An SDL_Color representing mint.
+     */
+    static SDL_Color getMint()
+
+/**
+ * @brief Returns an SDL_Color representing lavender.
+ * @return An SDL_Color representing lavender.
+ */
+    static SDL_Color getLavender();
+
+    /**
+     * @brief Returns an SDL_Color representing peach.
+     * @return An SDL_Color representing peach.
+     */
+    static SDL_Color getPeach();
+
+    /**
+     * @brief Returns an SDL_Color representing plum.
+     * @return An SDL_Color representing plum.
+     */
+    static SDL_Color getPlum();
+
+    /**
+     * @brief Returns an SDL_Color representing salmon.
+     * @return An SDL_Color representing salmon.
+     */
+    static SDL_Color getSalmon();
+
+    /**
+     * @brief Returns an SDL_Color representing turquoise.
+     * @return An SDL_Color representing turquoise.
+     */
+    static SDL_Color getTurquoise();
+
+    /**
+     * @brief Returns an SDL_Color representing violet.
+     * @return An SDL_Color representing violet.
+     */
+    static SDL_Color getViolet(); 
+ 
+    /**
+     * @brief Returns an SDL_Color representing peach.
+     * @return An SDL_Color representing peach.
+     */
+    static SDL_Color getPeach();
+
+    /**
+     * @brief Returns an SDL_Color representing plum.
+     * @return An SDL_Color representing plum.
+     */
+    static SDL_Color getPlum();
+
+    /**
+     * @brief Returns an SDL_Color representing salmon.
+     * @return An SDL_Color representing salomon.
+     */
+    static SDL_Color getSalmon();
+
+    /**
+     * @brief Returns an SDL_Color representing turqoise.
+     * @return An SDL_Color representing turqoise.
+     */
+    static SDL_Color getTurquoise();
+
+    /**
+     * @brief Returns an SDL_Color representing violet.
+     * @return An SDL_Color representing violet.
+     */
+    static SDL_Color getViolet(); 
 };
