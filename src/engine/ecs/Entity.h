@@ -50,7 +50,7 @@ public:
 	T* getComponent() {
 		auto it = components.find(&typeid(T));
 		if (it != components.end()) {
-			return (T*)(it->second);
+			return static_cast<T*>(it->second);
 		}
 		return nullptr;
 	}

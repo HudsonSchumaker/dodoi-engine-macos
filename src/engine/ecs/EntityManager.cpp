@@ -28,7 +28,6 @@
 #include "../gfx/Animation.h"
 #include "../gfx/AnimationController.h"
 
-EntityManager::EntityManager() {}
 EntityManager::~EntityManager() {
 	clear();
 }
@@ -45,21 +44,21 @@ Entity* EntityManager::createEntity() {
 	return createEntity(0.0f, 0.0f);
 }
 
-Entity* EntityManager::createEntity(float x, float y) {
+Entity* EntityManager::createEntity(const float x, const float y) {
 	Entity* entity = new Entity(++index);
 	entity->addComponent(new Transform(x, y));
 	entities.push_back(entity);
 	return entity;
 }
 
-Entity* EntityManager::createEntity(float x, float y, Tag tag) {
+Entity* EntityManager::createEntity(const float x, const float y, Tag tag) {
 	auto entity = createEntity(x, y);
 	entity->tags.first = tag;
 
 	return entity;
 }
 
-Entity* EntityManager::getEntity(unsigned long id) {
+Entity* EntityManager::getEntity(const unsigned long id) {
 	unsigned long low = 0;
 	unsigned long high = static_cast<unsigned long>(entities.size() - 1);
 

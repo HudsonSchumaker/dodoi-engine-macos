@@ -46,7 +46,7 @@ private:
     std::vector<Entity*> entities;
     std::set<Entity*, EntityComparator> entitiesToBeKilled;
 
-    EntityManager();
+    EntityManager() = default;
 
     /**
     * @brief Compares two entities based on their IDs in ascending order.
@@ -77,7 +77,7 @@ public:
     * @param y The y-coordinate of the entity.
     * @return Pointer to the newly created entity.
     */
-    Entity* createEntity(float x, float y);
+    Entity* createEntity(const float x, const float y);
 
     /**
     * @brief Creates a new entity with specified position and tag.
@@ -86,14 +86,14 @@ public:
     * @param tag The tag of the entity.
     * @return Pointer to the newly created entity.
     */
-    Entity* createEntity(float x, float y, Tag tag);
+    Entity* createEntity(const float x, const float y, Tag tag);
 
     /**
     * @brief Returns the entity with the specified ID.
     * @param id The ID of the entity.
     * @return Pointer to the entity if it exists, nullptr otherwise.
     */
-    Entity* getEntity(unsigned long id);
+    Entity* getEntity(const unsigned long id);
 
     /**
     * @brief Returns a constant reference to the vector of entities.
