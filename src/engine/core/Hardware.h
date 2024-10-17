@@ -27,6 +27,9 @@
 * @brief Handle hardware interations.
 */
 class Hardware final {
+private:
+	static const int cpuCount;
+
 public:
 	enum class JoyPadTypes {
 		ONE, PS4, SWITCH, PS5, UNKNOWN,
@@ -77,24 +80,26 @@ public:
 
 		joypads[JoyPadTypes::UNKNOWN] = {}; // Empty vector for unknown type
 	}
+
 	~Hardware() {}
 
+	/**
+	 * @brief Get the number of CPUs.
+	 * @return The number of CPUs.
+	 */
 	static int getCpuCount() {
-		return std::thread::hardware_concurrency();
+		return cpuCount;
 	}
 
+	/**
+	 * @brief Get the number of threads to use based on the size of the data.
+	 * @param size The size of the data.
+	 * @return The number of threads to use.
+	 */
 	static int getThreadNumber(int size) {
-		int cpuCount = getCpuCount();
-		if (size < 1001) { return 1; }
-		if (size < 2001) { return std::min(2, cpuCount); }
-		if (size < 3001) { return std::min(3, cpuCount); }
-		if (size < 4001) { return std::min(4, cpuCount); }
-		if (size < 5001) { return std::min(5, cpuCount); }
-		if (size < 6001) { return std::min(6, cpuCount); }
-		if (size < 7001) { return std::min(7, cpuCount); }
-		if (size < 8001) { return std::min(8, cpuCount); }
-		if (size < 9001) { return std::min(9, cpuCount); }
-		if (size < 10001) { return std::min(10, cpuCount); }
-		return cpuCount;
+		if (size < 1001) return 2;
+    	return std::min((size / 1000) + 2, cpuCount);
  	}
 };
+
+const int Hardware::cpuCount = std::thread::hardware_concurrency();
