@@ -40,6 +40,7 @@ int main(int argc, char* argv[]) {
 }
 
 void setUp() {
+    std::cout << Hardware. << std::endl;
     Gfx::getInstance()->setGfxContext();
     Sfx::getInstance()->setSfxContext();
     AssetManager::getInstance()->load();
