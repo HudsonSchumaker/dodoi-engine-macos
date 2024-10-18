@@ -13,6 +13,18 @@
             "externalConsole": false,
             "MIMode": "lldb",
             "preLaunchTask": "clang++ build"
+        },
+        {
+            "name": "clang++ - Build and run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/engine",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "clang++ build"
         }
     ]
 }
