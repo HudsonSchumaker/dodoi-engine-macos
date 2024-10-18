@@ -146,15 +146,15 @@ public:
 
     /**
     * @brief Draws a box on the renderer.
-    * @param rect The SDL_Rect defining the box.
+    * @param rect The SDL_FRect defining the box.
     * @param color The color of the box.
     */
-    void drawBox(const SDL_Rect& rect, const SDL_Color& color);
+    void drawBox(const SDL_FRect& rect, const SDL_Color& color);
 
     /**
     * @brief Draws a filled box on the renderer.
-    * @param rect The SDL_Rect defining the box.
+    * @param rect The SDL_FRect defining the box.
     * @param color The color of the box.
     */
-    void drawFillBox(const SDL_Rect& rect, const SDL_Color& color);
+    void drawFillBox(const SDL_FRect& rect, const SDL_Color& color);
 };

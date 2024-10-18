@@ -233,22 +233,22 @@ void Gfx::drawDashedCircle(const int centerX, const int centerY, const int radiu
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
-void Gfx::drawBox(const SDL_Rect& rect, const SDL_Color& color) {
+void Gfx::drawBox(const SDL_FRect& rect, const SDL_Color& color) {
     Uint8 r, g, b, a;
     SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderDrawRectF(renderer, &rect);
 
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
-void Gfx::drawFillBox(const SDL_Rect& rect, const SDL_Color& color) {
+void Gfx::drawFillBox(const SDL_FRect& rect, const SDL_Color& color) {
     Uint8 r, g, b, a;
     SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
 
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderFillRectF(renderer, &rect);
 
     SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
