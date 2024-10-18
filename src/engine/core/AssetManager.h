@@ -54,13 +54,49 @@ public:
     */
     void load();
 
+    /**
+     * @brief Adds a sound to the AssetManager.
+     * 
+     * @param name The name of the sound.
+     * @param filePath The file path of the sound.
+     */
     void addSound(const std::string& name, const std::string& filePath);
+    
+    /**
+     * @brief Adds a texture to the AssetManager.
+     * 
+     * @param name The name of the texture.
+     * @param value The value of the texture.
+     * @param filePath The file path of the texture.
+     */
     void addTexture(const std::string& name, const short value, const std::string& filePath);
     
+    /**
+     * @brief Gets a sound from the AssetManager.
+     * 
+     * @param name The name of the sound.
+     * @return The sound.
+     */
     Mix_Chunk* getSound(const std::string& name);
+    
+    /**
+     * @brief Gets a texture from the AssetManager.
+     * 
+     * @param name The name of the texture.
+     * @return The texture.
+     */
     SDL_Texture* getTexture(const std::string& name);
     
+    /**
+     * @brief Gets the number of sounds in the AssetManager.
+     * @return The number of sounds.
+     */
     int soundCount() const;
+    
+    /**
+     * @brief Gets the number of textures in the AssetManager.
+     * @return The number of textures.
+     */
     int textureCount() const;
 
     /**
