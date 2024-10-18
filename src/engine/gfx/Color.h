@@ -293,19 +293,13 @@ public:
      * @brief Returns an SDL_Color representing mint.
      * @return An SDL_Color representing mint.
      */
-    static SDL_Color getMint()
-
-/**
- * @brief Returns an SDL_Color representing lavender.
- * @return An SDL_Color representing lavender.
- */
-    static SDL_Color getLavender();
+    static SDL_Color getMint();
 
     /**
-     * @brief Returns an SDL_Color representing peach.
-     * @return An SDL_Color representing peach.
-     */
-    static SDL_Color getPeach();
+    * @brief Returns an SDL_Color representing lavender.
+    * @return An SDL_Color representing lavender.
+    */
+    static SDL_Color getLavender();
 
     /**
      * @brief Returns an SDL_Color representing plum.
@@ -324,36 +318,12 @@ public:
      * @return An SDL_Color representing turquoise.
      */
     static SDL_Color getTurquoise();
-
-    /**
-     * @brief Returns an SDL_Color representing violet.
-     * @return An SDL_Color representing violet.
-     */
-    static SDL_Color getViolet(); 
  
     /**
      * @brief Returns an SDL_Color representing peach.
      * @return An SDL_Color representing peach.
      */
     static SDL_Color getPeach();
-
-    /**
-     * @brief Returns an SDL_Color representing plum.
-     * @return An SDL_Color representing plum.
-     */
-    static SDL_Color getPlum();
-
-    /**
-     * @brief Returns an SDL_Color representing salmon.
-     * @return An SDL_Color representing salomon.
-     */
-    static SDL_Color getSalmon();
-
-    /**
-     * @brief Returns an SDL_Color representing turqoise.
-     * @return An SDL_Color representing turqoise.
-     */
-    static SDL_Color getTurquoise();
 
     /**
      * @brief Returns an SDL_Color representing violet.
