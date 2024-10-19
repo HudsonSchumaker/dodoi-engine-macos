@@ -55,6 +55,7 @@ void PrimitiveRenderSystem::update(const Camera* camera) {
 		}
 	}	
 
+	// Sort primitives
 	sortPrimitives(&background, &middleground, &foreground);
 
 	for (auto& primitive : background) {
@@ -87,13 +88,13 @@ void PrimitiveRenderSystem::getPrimitives(primitives_t* primitives) {
 }
 
 void PrimitiveRenderSystem::sortPrimitives(primitives_t* background, primitives_t* middleground, primitives_t* foreground) {
-	auto future1 = std::async(std::launch::async, [&]() {
+	auto bgFuture = std::async(std::launch::async, [&]() {
 		std::sort(background->begin(), background->end(), [](const auto& a, const auto& b) {
 			return std::get<0>(a)->zIndex < std::get<0>(b)->zIndex;
 		});
 	});
 
-	auto future2 = std::async(std::launch::async, [&]() {
+	auto mdFuture = std::async(std::launch::async, [&]() {
 		std::sort(middleground->begin(), middleground->end(), [](const auto& a, const auto& b) {
 			Transform* transformA = std::get<1>(a);
 			Transform* transformB = std::get<1>(b);
@@ -101,16 +102,16 @@ void PrimitiveRenderSystem::sortPrimitives(primitives_t* background, primitives_
 		});
 	});
 
-	auto future3 = std::async(std::launch::async, [&]() {
+	auto fgFuture = std::async(std::launch::async, [&]() {
 		std::sort(foreground->begin(), foreground->end(), [](const auto& a, const auto& b) {
 			return std::get<0>(a)->zIndex < std::get<0>(b)->zIndex;
 		});
 	});
 
 	// Wait for all futures to complete
-	future1.get();
-	future2.get();
-	future3.get();
+	bgFuture.get();
+	mdFuture.get();
+	fgFuture.get();
 }
 
 void PrimitiveRenderSystem::renderLine(primitive_t& primitive, const Camera* camera) {

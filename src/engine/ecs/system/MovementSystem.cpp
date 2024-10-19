@@ -20,34 +20,13 @@
 * limitations under the License.
 */
 #include "MovementSystem.h"
-#include "../EntityManager.h"
-#include "../../core/Hardware.h"
 #include "../component/Waypoint.h"
 #include "../component/Transform.h"
 #include "../component/RigidBody.h"
 
 void MovementSystem::update(float dt) {
-    // Get all entities with RigidBody component
-    auto entities = EntityManager::getInstance()->getEntitiesWithComponent<RigidBody>();
-
-    // Get the number of these entities
-    int entitiesSize = static_cast<int>(entities.size());
-
-    // Get the number of threads based on the number of entities
-    int numThreads = Hardware::getThreadNumber(entitiesSize);
-
-    // Calculate the size of each chunk for parallel processing
-    int chunkSize = (entitiesSize + numThreads - 1) / numThreads; // Round up division
-
-    // Vector to hold the chunks of entities
-    std::vector<std::vector<Entity*>> chunks;
-    chunks.reserve(numThreads); // Reserve space for the chunks
-
-    // Divide the entities into chunks
-    for (int i = 0; i < entities.size(); i += chunkSize) {
-        chunks.emplace_back(entities.begin() + i, entities.begin() +
-            std::min(i + chunkSize, entitiesSize));
-    }
+    // Get all entities with RigidBody components
+    auto chunks = calculateChunksAndThreads<RigidBody>();
 
     // Vector to hold the threads
     std::vector<std::thread> threads;
@@ -63,8 +42,8 @@ void MovementSystem::update(float dt) {
 				}
 
                 auto components = entity->getComponents<RigidBody, Transform>();
-                RigidBody* rigidBody = std::get<1>(components); // Get the RigidBody component
-                Transform* transform = std::get<2>(components); // Get the Transform component
+                RigidBody* rigidBody = std::get<0>(components); // Get the RigidBody component
+                Transform* transform = std::get<1>(components); // Get the Transform component
 
                 // If the entity has a RigidBody and Transform
                 if (rigidBody && transform) {

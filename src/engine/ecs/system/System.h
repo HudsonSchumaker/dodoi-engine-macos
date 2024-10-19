@@ -21,9 +21,40 @@
 */
 #pragma once
 #include "../../../Pch.h"
+#include "../EntityManager.h"
+#include "../../core/Hardware.h"
+#include "../component/Component.h"
 
 /**
 * @class System
 * @brief The base class for all systems.
 */
-class System {};
+class System {
+public:
+    template <typename Component>
+    static std::vector<std::vector<Entity*>> calculateChunksAndThreads() {
+        // Get all entities with the specified component
+        auto entities = EntityManager::getInstance()->getEntitiesWithComponent<Component>();
+
+        // Get the number of these entities
+        int entitiesSize = static_cast<int>(entities.size());
+
+        // Get the number of threads based on the number of entities
+        int numThreads = Hardware::getThreadNumber(entitiesSize);
+
+        // Calculate the size of each chunk for parallel processing
+        int chunkSize = (entitiesSize + numThreads - 1) / numThreads; // Round up division
+
+        // Vector to hold the chunks of entities
+        std::vector<std::vector<Entity*>> chunks;
+        chunks.reserve(numThreads); // Reserve space for the chunks
+
+        // Divide the entities into chunks
+        for (int i = 0; i < entities.size(); i += chunkSize) {
+            chunks.emplace_back(entities.begin() + i, entities.begin() +
+                std::min(i + chunkSize, entitiesSize));
+        }
+
+        return chunks;
+    }
+};

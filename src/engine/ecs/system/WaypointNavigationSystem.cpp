@@ -20,34 +20,13 @@
 * limitations under the License.
 */
 #include "WaypointNavigationSystem.h"
-#include "../EntityManager.h"
-#include "../../core/Hardware.h"
 #include "../component/Waypoint.h"
 #include "../component/Transform.h"
 #include "../component/RigidBody.h"
 
 void WaypointNavigationSystem::update(float dt) {
     // Get all entities with Waypoint component
-    auto entities = EntityManager::getInstance()->getEntitiesWithComponent<Waypoint>();
-    
-    // Get the number of these entities
-    int entitiesSize = static_cast<int>(entities.size());
-
-    // Get the number of threads based on the number of entities
-    int numThreads = Hardware::getThreadNumber(entitiesSize);
-
-    // Calculate the size of each chunk for parallel processing
-    int chunkSize = (entitiesSize + numProcessors - 1) / numProcessors; // Round up division
-
-    // Vector to hold the chunks of entities
-    std::vector<std::vector<Entity*>> chunks;
-    chunks.reserve(numProcessors); // Reserve space for the chunks
-
-    // Divide the entities into chunks
-    for (int i = 0; i < entities.size(); i += chunkSize) {
-        chunks.emplace_back(entities.begin() + i, entities.begin() +
-            std::min(i + chunkSize, entitiesSize));
-    }
+    auto chunks = calculateChunksAndThreads<Waypoint>();
 
     // Vector to hold the threads
     std::vector<std::thread> threads;

@@ -55,6 +55,7 @@ void RenderSystem::update(const Camera* camera) {
 		}
 	}
 
+	// Sort renderables by z-index
 	sortRenderables(&background, &middleground, &foreground);
 
 	for (auto& renderable : background) {
@@ -87,13 +88,13 @@ void RenderSystem::getRenderables(renderables_t* renderables) {
 }
 
 void RenderSystem::sortRenderables(renderables_t* background, renderables_t* middleground, renderables_t* foreground) {
-	auto future1 = std::async(std::launch::async, [&]() {
+	auto bgFuture = std::async(std::launch::async, [&]() {
 		std::sort(background->begin(), background->end(), [](const auto& a, const auto& b) {
 			return std::get<0>(a)->zIndex < std::get<0>(b)->zIndex;
 		});
 	});
 
-	auto future2 = std::async(std::launch::async, [&]() {
+	auto mdFuture = std::async(std::launch::async, [&]() {
 		std::sort(middleground->begin(), middleground->end(), [](const auto& a, const auto& b) {
 			Transform* transformA = std::get<1>(a);
 			Transform* transformB = std::get<1>(b);
@@ -101,16 +102,16 @@ void RenderSystem::sortRenderables(renderables_t* background, renderables_t* mid
 		});
 	});
 
-	auto future3 = std::async(std::launch::async, [&]() {
+	auto fgFuture = std::async(std::launch::async, [&]() {
 		std::sort(foreground->begin(), foreground->end(), [](const auto& a, const auto& b) {
 			return std::get<0>(a)->zIndex < std::get<0>(b)->zIndex;
 		});
 	});
 
 	// Wait for all futures to complete
-	future1.get();
-	future2.get();
-	future3.get();
+	bgFuture.get();
+	mdFuture.get();
+	fgFuture.get();
 }
 
 void RenderSystem::renderSprite(renderable_t& renderable, const Camera* camera) {
@@ -263,8 +264,7 @@ void RenderSystem::renderAnimationController(renderable_t& renderable, const Cam
 				NULL,
 				SDL_FLIP_HORIZONTAL
 			);
-		}
-		else {
+		} else {
 			SDL_RenderCopyExF(
 				renderer,
 				animation->texture,

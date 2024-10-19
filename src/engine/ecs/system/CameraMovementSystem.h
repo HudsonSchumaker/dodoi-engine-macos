@@ -1,7 +1,7 @@
 /**
-* @file MovementSystem.h
+* @file CameraMovementSystem.h
 * @author Hudson Schumaker
-* @brief Defines the MovementSystem class.
+* @brief Defines the CameraMovementSystem class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -21,11 +21,13 @@
 */
 #pragma once
 #include "System.h"
+#include "../../core/Map.h"
+#include "../../core/Camera.h"
 
-class MovementSystem final : public System {
+class CameraMovementSystem : public System {
 public:
-	MovementSystem() = default;
-	~MovementSystem() = default;
+	CameraMovementSystem() = default;
+	~CameraMovementSystem() = default;
 
-	void update(float dt);
+	void update(Map* map, Camera* camera);
 };

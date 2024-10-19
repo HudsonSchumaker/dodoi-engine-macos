@@ -21,7 +21,6 @@
 */
 #pragma once
 #include "System.h"
-#include "../EntityManager.h"
 #include "../../core/Camera.h"
 #include "../../gfx/GfxTypes.h"
 #include "../component/Transform.h"

@@ -1,7 +1,7 @@
 /**
-* @file MovementSystem.h
+* @file RadarSystem.h
 * @author Hudson Schumaker
-* @brief Defines the MovementSystem class.
+* @brief Defines the RadarSystem class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -22,10 +22,10 @@
 #pragma once
 #include "System.h"
 
-class MovementSystem final : public System {
-public:
-	MovementSystem() = default;
-	~MovementSystem() = default;
+class RadarSystem final : public System {
+public: 
+	RadarSystem() = default;
+	~RadarSystem() = default;
 
-	void update(float dt);
+    void update();
 };
