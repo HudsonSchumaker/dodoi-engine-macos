@@ -101,5 +101,3 @@ public:
     	return std::min((size / 1000) + 2, cpuCount);
  	}
 };
-
-const int Hardware::cpuCount = std::thread::hardware_concurrency();
