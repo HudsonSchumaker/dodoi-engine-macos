@@ -147,8 +147,7 @@ void RenderSystem::renderSprite(renderable_t& renderable, const Camera* camera) 
 			NULL,
 			SDL_FLIP_HORIZONTAL
 		);
-	}
-	else {
+	} else {
 		SDL_RenderCopyExF(
 			renderer,
 			sprite->texture,
@@ -199,8 +198,7 @@ void RenderSystem::renderAnimation(renderable_t& renderable, const Camera* camer
 
 		if (animation->flip) {
 			SDL_RenderCopyExF(renderer, animation->texture, &origin, &dest, transform->rotation, NULL, SDL_FLIP_HORIZONTAL);
-		}
-		else {
+		} else {
 			SDL_RenderCopyExF(
 				renderer,
 				animation->texture,

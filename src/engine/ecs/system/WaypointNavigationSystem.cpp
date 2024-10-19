@@ -19,7 +19,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-# include "WaypointNavigationSystem.h"
+#include "WaypointNavigationSystem.h"
 #include "../EntityManager.h"
 #include "../../core/Hardware.h"
 #include "../component/Waypoint.h"
@@ -34,7 +34,7 @@ void WaypointNavigationSystem::update(float dt) {
     int entitiesSize = static_cast<int>(entities.size());
 
     // Get the number of threads based on the number of entities
-    int numProcessors = Hardware::getThreadNumber(entitiesSize);
+    int numThreads = Hardware::getThreadNumber(entitiesSize);
 
     // Calculate the size of each chunk for parallel processing
     int chunkSize = (entitiesSize + numProcessors - 1) / numProcessors; // Round up division
