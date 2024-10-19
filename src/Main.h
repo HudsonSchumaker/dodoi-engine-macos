@@ -22,5 +22,12 @@
 #pragma once
 #include "Pch.h"
 
+/**
+ * @brief Initialize the game.
+ */
 void setUp();
+
+/**
+ * @brief Update the game.
+ */
 void quit();

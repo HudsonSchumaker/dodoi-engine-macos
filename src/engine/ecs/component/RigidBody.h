@@ -42,7 +42,7 @@ public:
     float invMass = 1.0f;
     bool isMoving = true;
 
-    RigidBody() {}
+    RigidBody() = default;
     RigidBody(float x, float y) {
         this->velocity.x = x;
         this->velocity.y = y;
