@@ -20,8 +20,8 @@
 * limitations under the License.
 */
 #pragma once
+#include "../../Pch.h"
 #include "Entity.h"
-#include "../Defs.h"
 #include "../gfx/GfxTypes.h"
 
 /**

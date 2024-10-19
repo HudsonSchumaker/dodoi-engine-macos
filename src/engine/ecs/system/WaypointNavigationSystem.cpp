@@ -57,9 +57,11 @@ void WaypointNavigationSystem::update(float dt) {
         threads.emplace_back([chunk, dt] {
             // For each entity in the chunk
             for (auto& entity : chunk) {
-                Waypoint* points = entity->getComponent<Waypoint>();      // Get the Waypoint component
-                RigidBody* rigidBody = entity->getComponent<RigidBody>(); // Get the RigidBody component
-                Transform* transform = entity->getComponent<Transform>(); // Get the Transform component
+
+                auto components = entity->getComponents<Waypoint, RigidBody, Transform>();
+                Waypoint* points = std::get<0>(components);     // Get the Waypoint component
+                RigidBody* rigidBody = std::get<1>(components); // Get the RigidBody component
+                Transform* transform = std::get<2>(components); // Get the Transform component
 
                 // If the entity has a RigidBody, Transform, and Waypoints
                 if (rigidBody && transform && !points->waypoints.empty()) {
@@ -67,20 +69,22 @@ void WaypointNavigationSystem::update(float dt) {
                     auto currentWaypoint = points->waypoints.front();
 
                     // Calculate the direction vector
-                    float dx = currentWaypoint.first - transform->position.x;
-                    float dy = currentWaypoint.second - transform->position.y;
+                    float dx = (float)currentWaypoint.first - transform->position.x;
+                    float dy = (float)currentWaypoint.second - transform->position.y;
                     float distance = std::sqrtf(dx * dx + dy * dy);
                         
                     // Normalize the direction vector
                     float directionX = dx / distance;
                     float directionY = dy / distance;
 
+                    // Define an epsilon value for proximity check
+                    const float epsilon = 0.01f;
+
                     // Check if the Entity has reached the Waypoint
-                    if (distance <= 1.0f) {
+                    if (distance <= epsilon) {
                         // Remove the current Waypoint from the list
                         points->waypoints.erase(points->waypoints.begin());
-                    }
-                    else {
+                    } else {
                         // Calculate the movement distances based on the speeds and delta time
                         float movementDistanceX = rigidBody->velocity.x * dt;
                         float movementDistanceY = rigidBody->velocity.y * dt;

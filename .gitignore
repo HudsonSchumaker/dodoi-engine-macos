@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-*DS_Store
+.DS_Store
 
 # Compiled Object files
 *.slo
@@ -9,6 +9,7 @@
 *.obj
 *.map
 *.lst
+*.dSYM
 
 # Precompiled Headers
 *.gch

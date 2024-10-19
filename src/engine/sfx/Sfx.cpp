@@ -2,23 +2,23 @@
 
 Sfx::~Sfx() {
 	Mix_FreeMusic(music);
-    Mix_HaltChannel(-1);
-    Mix_CloseAudio();
-    Mix_Quit();
+	Mix_HaltChannel(-1);
+	Mix_CloseAudio();
+	Mix_Quit();
 }
 
 Sfx* Sfx::getInstance() {
-    if (instance == nullptr) {
-        instance = new Sfx();
-    }
+	if (instance == nullptr) {
+		instance = new Sfx();
+	}
 
-    return instance;
+	return instance;
 }
 
 void Sfx::setSfxContext() {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 8, 1024) < 0) {
 		std::cerr << "Error: " << Mix_GetError() << std::endl;
-        return;
+		return;
 	}
 }
 

@@ -1,7 +1,7 @@
 /**
-* @file Camera.h
+* @file SplashScreen.h
 * @author Hudson Schumaker
-* @brief Defines the Camera class.
+* @brief Defines the SplashScreen class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -20,24 +20,26 @@
 * limitations under the License.
 */
 #pragma once
-#include "../../Pch.h"
+#include "../engine/core/Scene.h"
 
 /**
-* @class Camera
-* @brief Used to define the viewport.
+* @class SplashScreen
+* @brief The SplashScreen class.
 */
-class Camera final {
+class SplashScreen final : public Scene {
+private:
+	SDL_Texture* logoTexture = nullptr;
+	SDL_Rect rect = { 0, 0, 0, 0 };
+
+	void load() override;
+	void input() override;
+	void update() override;
+	void render() override;
+	void unload() override;
+
 public:
-	int x, y, w, h;
-	SDL_Color color = { 32, 32, 32, 255 };	
+	SplashScreen();
+	~SplashScreen();
 
-	Camera() : Camera(0, 0, 0, 0) {}
-	Camera(int x, int y, int w, int h) {
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-
-	~Camera() = default;
+	short run() override;
 };

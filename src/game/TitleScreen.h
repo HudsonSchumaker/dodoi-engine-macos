@@ -1,7 +1,7 @@
 /**
-* @file Camera.h
+* @file TitleScreen.h
 * @author Hudson Schumaker
-* @brief Defines the Camera class.
+* @brief Defines the TitleScreen class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -20,24 +20,31 @@
 * limitations under the License.
 */
 #pragma once
-#include "../../Pch.h"
+#include "../engine/core/Scene.h"
+#include "../engine/core/ParallaxHorizontal.h"
+#include "../engine/ecs/system/WaypointNavigationSystem.h"
 
 /**
-* @class Camera
-* @brief Used to define the viewport.
+* @class TitleScreen
+* @brief The TitleScreen class.
 */
-class Camera final {
+class TitleScreen final : public Scene {
+private:
+	SDL_Texture* logoTexture = nullptr;
+	SDL_Rect rect = { 0, 0, 0, 0 };
+
+	WaypointNavigationSystem* nav= nullptr;
+	ParallaxHorizontal* parallax = nullptr;
+
+	void load() override;
+	void input() override;
+	void update() override;
+	void render() override;
+	void unload() override;
+
 public:
-	int x, y, w, h;
-	SDL_Color color = { 32, 32, 32, 255 };	
+	TitleScreen();
+	~TitleScreen();
 
-	Camera() : Camera(0, 0, 0, 0) {}
-	Camera(int x, int y, int w, int h) {
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-
-	~Camera() = default;
+	short run() override;
 };

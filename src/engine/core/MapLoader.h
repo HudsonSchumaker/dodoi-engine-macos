@@ -1,7 +1,7 @@
 /**
-* @file Camera.h
+* @file MapLoader.h
 * @author Hudson Schumaker
-* @brief Defines the Camera class.
+* @brief Defines the MapLoader class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -20,24 +20,19 @@
 * limitations under the License.
 */
 #pragma once
-#include "../../Pch.h"
+#include "../core/Map.h"
 
 /**
-* @class Camera
-* @brief Used to define the viewport.
+* @class MapLoader class.
+* @brief Load a map using the data from a Map.
 */
-class Camera final {
+class MapLoader final {
 public:
-	int x, y, w, h;
-	SDL_Color color = { 32, 32, 32, 255 };	
-
-	Camera() : Camera(0, 0, 0, 0) {}
-	Camera(int x, int y, int w, int h) {
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-
-	~Camera() = default;
+	MapLoader() = default
+	~MapLoader() = default;
+	
+    /**
+     * @brief Load a map using the data from a Map.
+     */
+	void loadMap(Map map);
 };

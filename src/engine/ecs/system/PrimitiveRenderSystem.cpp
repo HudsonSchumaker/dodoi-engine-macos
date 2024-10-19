@@ -157,17 +157,16 @@ void PrimitiveRenderSystem::renderBox(primitive_t& primitive, const Camera* came
 		return;
 	}
 
-	SDL_Rect dstRect = {
-		static_cast<int>(transform->position.x - (box->isFixed ? 0 : camera->x)),
-		static_cast<int>(transform->position.y - (box->isFixed ? 0 : camera->y)),
-		static_cast<int>(box->w * transform->scale.x),
-		static_cast<int>(box->h * transform->scale.y)
+	SDL_FRect dstRect = {
+		transform->position.x - (box->isFixed ? 0.0f : camera->x),
+		transform->position.y - (box->isFixed ? 0.0f : camera->y),
+		box->w * transform->scale.x,
+		box->h * transform->scale.y
 	};
 
 	if (!box->isFilled) {
 		Gfx::getInstance()->drawBox(dstRect, box->color);
-	} 
-	else {
+	} else {
 		Gfx::getInstance()->drawFillBox(dstRect, box->color);
 	}
 }

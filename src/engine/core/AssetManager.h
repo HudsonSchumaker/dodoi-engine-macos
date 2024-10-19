@@ -20,8 +20,7 @@
 * limitations under the License.
 */
 #pragma once
-#include "../Defs.h"
-
+#include "../../Pch.h"
 /**
 * @class AssetManager
 * @brief The AssetManager class encapsulates the functionality of managing game assets.

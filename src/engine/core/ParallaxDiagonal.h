@@ -1,10 +1,10 @@
 /**
-* @file Camera.h
+* @file ParallaxDiagonal.h
 * @author Hudson Schumaker
-* @brief Defines the Camera class.
+* @brief Defines the ParallaxDiagonal class.
 * @version 1.0.0
 *
-* Dodoi-Engine is a game engine developed by Dodoi-Lab.
+* Dodoi Engine is a game engine developed by Dodoi-Lab.
 * @copyright Copyright (c) 2024, Dodoi-Lab
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,25 +19,32 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
 #pragma once
 #include "../../Pch.h"
 
 /**
-* @class Camera
-* @brief Used to define the viewport.
+* @class ParallaxDiagonal
+* @brief The ParallaxDiagonal class.
 */
-class Camera final {
+class ParallaxDiagonal final {
+private:
+	SDL_Texture* background = nullptr;
+	SDL_Texture* texture = nullptr;
+
+	SDL_Rect backRect;
+	SDL_Rect rectA;
+	SDL_Rect rectB;
+	SDL_Rect rectC;
+	SDL_Rect rectD;
+
+	SDL_Point size;
+
 public:
-	int x, y, w, h;
-	SDL_Color color = { 32, 32, 32, 255 };	
+	ParallaxDiagonal(std::string parallaxName);
+	ParallaxDiagonal(std::string backName, std::string parallaxName);
+	~ParallaxDiagonal();
 
-	Camera() : Camera(0, 0, 0, 0) {}
-	Camera(int x, int y, int w, int h) {
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-
-	~Camera() = default;
+	void update();
+	void render(SDL_Renderer* renderer);
 };

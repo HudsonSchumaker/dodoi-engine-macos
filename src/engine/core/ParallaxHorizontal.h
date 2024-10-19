@@ -21,7 +21,7 @@
 */
 
 #pragma once
-#include "../Defs.h"
+#include "../../Pch.h"
 
 /**
 * @class ParallaxHorizontal

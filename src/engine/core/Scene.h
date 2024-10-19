@@ -20,7 +20,7 @@
 * limitations under the License.
 */
 #pragma once
-#include "../Defs.h"
+#include "../../Pch.h"
 #include "../gfx/Gfx.h"
 #include "../core/Camera.h"
 
