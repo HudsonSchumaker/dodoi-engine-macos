@@ -1,7 +1,7 @@
 /**
-* @file Defs.h
+* @file Pch.h
 * @author Hudson Schumaker
-* @brief Defs includes and definitions for the Dodoi-Engine.
+* @brief Pch includes and definitions for the Dodoi-Engine.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -59,6 +59,10 @@
 #define IMAGE_FOLDER "./data/images/"
 #define MAP_FOLDER "./data/maps/"
 
+/**
+ * @brief The Defs class contains all the constants used in the Dodoi-Engine.
+ * @version 1.0.0
+ */
 class Defs final {
 public:
     inline static const char NAME[] = "Dodoi Engine v.0.1.0-macOS";

@@ -20,8 +20,8 @@
 * limitations under the License.
 */
 #include "Main.h"
-#include "TitleScreen.h"
-#include "SplashScreen.h"
+#include "game/TitleScreen.h"
+#include "game/SplashScreen.h"
 #include "engine/gfx/Gfx.h"
 #include "engine/sfx/Sfx.h"
 #include "engine/core/AssetManager.h"
