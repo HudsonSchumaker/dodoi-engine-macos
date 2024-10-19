@@ -10,7 +10,7 @@ ECS, SOLID, DRY, KISS and OOP with c++ 17 and SDL2
 2. **Project Setup:**
    - Set up version control (e.g., Git).
    - Create project structure.
-   - Configure build system (e.g., CMake).
+   - Configure build system (e.g., Make).
 
 3. **Dependencies:**
    - Install SDL2.

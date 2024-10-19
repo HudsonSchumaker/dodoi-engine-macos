@@ -15,7 +15,7 @@
             "preLaunchTask": "clang++ build"
         },
         {
-            "name": "clang++ - Build and run",
+            "name": "clang++ - Build and run O3",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/engine",
@@ -24,7 +24,33 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "preLaunchTask": "clang++ build"
+            "MIMode": "lldb",
+            "preLaunchTask": "clang++ build O3"
+        },
+        {
+            "name": "clang++ - Build and run O2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/engine",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "clang++ build O2"
+        },
+        {
+            "name": "clang++ - Run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/engine",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
         }
     ]
 }
