@@ -1,3 +1,11 @@
+#
+# 2d dodo engine
+# Makefile to compile the project
+# use cat -e -t -v Makefile to check for whitespace errors, ^I = tab, ^M = newline $ = end of line
+#
+# Hudson Schumaker
+#
+
 # Define compiler and flags
 CXX = g++
 CXXFLAGS = -Wall -std=c++17 -O3 -I/usr/local/opt/sdl2/include
@@ -18,6 +26,10 @@ compile:
 # Target to run the application
 run: compile
 	./$(OUTPUT)
+
+# Target to clean the build directory
+clean:
+	rm -rf build/*
 
 # Default target
 all: run
