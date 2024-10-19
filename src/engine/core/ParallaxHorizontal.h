@@ -39,7 +39,17 @@ private:
 	SDL_Point size;
 
 public:
+	/**
+	 * @brief Construct a new ParallaxHorizontal object.
+	 * @param parallaxName The name of the parallax image.
+	 */
 	ParallaxHorizontal(std::string parallaxName);
+
+	/**
+	 * @brief Construct a new ParallaxHorizontal object.
+	 * @param bgName The name of the background image.
+	 * @param parallaxName The name of the parallax image.
+	 */
 	ParallaxHorizontal(std::string bgName, std::string parallaxName);
 	~ParallaxHorizontal();
 

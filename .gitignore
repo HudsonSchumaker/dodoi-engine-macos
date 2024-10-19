@@ -40,3 +40,6 @@
 *.nacp
 *.nro
 
+# Ignore engine and engine-app directories
+build/engine
+build/engine-app
