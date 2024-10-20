@@ -21,7 +21,7 @@
 */
 #pragma once
 #include "../engine/core/Scene.h"
-#include "../engine/core/ParallaxDiagonal.h"
+#include "../engine/core/ParallaxVertical.h"
 #include "../engine/ecs/system/WaypointNavigationSystem.h"
 
 /**
@@ -34,7 +34,7 @@ private:
 	SDL_Rect rect = { 0, 0, 0, 0 };
 
 	WaypointNavigationSystem* nav= nullptr;
-	ParallaxDiagonal* parallax = nullptr;
+	ParallaxVertical* parallax = nullptr;
 
 	void load() override;
 	void input() override;

@@ -38,7 +38,7 @@ TitleScreen::~TitleScreen() {
 }
 
 void TitleScreen::load() {
-	parallax = new ParallaxDiagonal("backyellow1280", "backkunai");
+	parallax = new ParallaxVertical("backyellow1280", "backkunai");
 	nextScene = "0";
 	logoTexture = Gfx::getInstance()->loadTexture("dodoi.png");
 	Dimension<int> size = Gfx::getInstance()->getTextureSize(logoTexture);
