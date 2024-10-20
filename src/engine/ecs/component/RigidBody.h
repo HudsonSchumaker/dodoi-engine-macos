@@ -66,5 +66,5 @@ public:
         init();
     }
 
-    ~RigidBody() {}
+    ~RigidBody() = default;
 };

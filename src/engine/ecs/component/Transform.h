@@ -68,7 +68,7 @@ public:
         this->rotation = rotation;
     }
 
-    ~Transform() {}
+    ~Transform() = default;
 
     Transform clone() {
         return Transform(position, scale, rotation);

@@ -59,8 +59,26 @@ private:
 	* @param camera A pointer to the camera used for rendering.
 	*/
 	void renderCaller(renderable_t& renderable, const Camera* camera);
+
+	/**
+	 * @brief Renders a sprite entity.
+	 * @param renderable The renderable entity to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderSprite(renderable_t& renderable, const Camera* camera);
+	
+	/**
+	 * @brief Renders a text entity.
+	 * @param renderable The renderable entity to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderAnimation(renderable_t& renderable, const Camera* camera);
+	
+	/**
+	 * @brief Renders a text entity.
+	 * @param renderable The renderable entity to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderAnimationController(renderable_t& renderable, const Camera* camera);
 
 public:

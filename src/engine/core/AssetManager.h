@@ -21,11 +21,10 @@
 */
 #pragma once
 #include "../../Pch.h"
+
 /**
 * @class AssetManager
 * @brief The AssetManager class encapsulates the functionality of managing game assets.
-*
-* This class is responsible for loading, adding, retrieving, and clearing game assets.
 */
 class AssetManager final {
 private:

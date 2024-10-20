@@ -66,8 +66,25 @@ private:
 	*/
 	void renderCaller(primitive_t& primitive, const Camera* camera);
 	
+	/**
+	 * @brief Renders a line primitive.
+	 * @param line The line primitive to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderLine(primitive_t& line, const Camera* camera);
+	
+	/**
+	 * @brief Renders a box primitive.
+	 * @param box The box primitive to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderBox(primitive_t& box, const Camera* camera);
+	
+	/**
+	 * @brief Renders a circle primitive.
+	 * @param circle The circle primitive to be rendered.
+	 * @param camera A pointer to the camera used for rendering.
+	 */
 	void renderCircle(primitive_t& circle, const Camera* camera);
 
 public:

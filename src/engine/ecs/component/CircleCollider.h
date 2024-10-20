@@ -1,7 +1,7 @@
 /**
-* @file Waypoint.h
+* @file CircleCollider.h
 * @author Hudson Schumaker
-* @brief Defines the Waypoint class.
+* @brief Defines the CircleCollider class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -21,33 +21,25 @@
 */
 #pragma once
 #include "Component.h"
+#include "../../math/Vec2.h"
 
 /**
-* @class Waypoint
-* @brief A class that represents a waypoint in a game.
-*/
-class Waypoint final : public Component {
+ * @class CircleCollider
+ * @brief A circle collider component.
+ */
+class CircleCollider final : public Component {
 public:
+	Vec2 offset;
+	float radius = 0.0f;
 
-	/**
-	* @property waypoints A vector of tuples. Each tuple represents a waypoint and contains:
-	* - A pair of shorts representing the point (x, y)
-	*/
-	std::vector<std::pair<short, short>> waypoints;
-
-	Waypoint(std::pair<short, short> point) {
-		waypoints.push_back(point);
+	CircleCollider() = default;
+	CircleCollider(const float radius) : radius(radius) {}
+	CircleCollider(float radius, Vec2 offset) : radius(radius), offset(offset) {}
+	CircleCollider(float radius, float offsetX, float offsetY) {
+		this->radius = radius;
+		this->offset.x = offsetX;
+		this->offset.y = offsetY;
 	}
 
-	/**
-	* add a Point that takes a pair of shorts representing a point (x, y).
-	* @param point A pair of shorts representing the point
-	*/
-	void addPoint(std::pair<short, short> point) {
-		waypoints.push_back(point);
-	}
-	
-	~Waypoint() {
-		waypoints.clear();
-	}
+	~CircleCollider() = default;
 };
