@@ -66,7 +66,7 @@ int AssetManager::soundCount() const {
 
 void AssetManager::load() {
 
-    auto future1 = std::async(std::launch::async, [&]() {
+    auto imageFuture = std::async(std::launch::async, [&]() {
         auto images = FileUtils::listImageFilesInFolder();
         for (auto& file : images) {
             auto filePath = IMAGE_FOLDER + file;
@@ -74,7 +74,7 @@ void AssetManager::load() {
         }
     });
     
-    auto future2 = std::async(std::launch::async, [&]() {
+    auto audioFuture = std::async(std::launch::async, [&]() {
         auto sounds = FileUtils::listAudioFilesInFolder();
         for (auto& file : sounds) {
 		    auto filePath = AUDIO_FOLDER + file;
@@ -82,8 +82,8 @@ void AssetManager::load() {
 	    }
     });
 
-	future1.get();
-	future2.get();
+	imageFuture.get();
+	audioFuture.get();
 }
 
 void AssetManager::clearAssets() {
