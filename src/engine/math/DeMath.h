@@ -37,26 +37,26 @@ public:
     * @param y2 The y-coordinate of the second point.
     * @return The distance between the two points.
     */
-    static float distanceBetweenPoints(float x1, float y1, float x2, float y2);
+    static float distanceBetweenPoints(const float x1, const float y1, const float x2, const float y2);
 
     /**
     * @brief Normalize thr angle.
     * @param angle The angle.
     * @return The normalized angle.
     */
-    static float normalizeAngle(float angle);
+    static float normalizeAngle(const float angle);
 
     /**
     * @brief Converts an angle from degrees to radians.
     * @param angle The angle in degrees.
     * @return The angle in radians.
     */
-    static float deg2Rad(float angle);
+    static float deg2Rad(const float angle);
 
     /**
     * @brief Converts an angle from radians to degrees.
     * @param angle The angle in radians.
     * @return The angle in degrees.
     */
-    static float rad2Deg(float angle);
+    static float rad2Deg(const float angle);
 };
