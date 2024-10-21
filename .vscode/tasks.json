@@ -26,6 +26,7 @@
                 "${workspaceFolder}/src/engine/math/*.cpp",
                 "${workspaceFolder}/src/engine/io/*.cpp",
                 "${workspaceFolder}/src/engine/sfx/*.cpp",
+                "${workspaceFolder}/src/engine/physics/*.cpp",
                 "-o",
                 "${workspaceFolder}/build/engine"
             ],
@@ -68,6 +69,7 @@
                 "${workspaceFolder}/src/engine/math/*.cpp",
                 "${workspaceFolder}/src/engine/io/*.cpp",
                 "${workspaceFolder}/src/engine/sfx/*.cpp",
+                "${workspaceFolder}/src/engine/physics/*.cpp",
                 "-o",
                 "${workspaceFolder}/build/engine"
             ],
@@ -112,6 +114,7 @@
                 "${workspaceFolder}/src/engine/math/*.cpp",
                 "${workspaceFolder}/src/engine/io/*.cpp",
                 "${workspaceFolder}/src/engine/sfx/*.cpp",
+                "${workspaceFolder}/src/engine/physics/*.cpp",
                 "-o",
                 "${workspaceFolder}/build/engine"
             ],
