@@ -20,3 +20,26 @@
 * limitations under the License.
 */
 #pragma once
+#include "../ecs/component/Transform.h"
+#include "../ecs/component/RigidBody.h"
+#include "../ecs/component/CircleCollider.h"
+
+struct Collision {
+	Transform* tA = nullptr;
+	Transform* tB = nullptr;
+
+	RigidBody* rA = nullptr;
+	RigidBody* rB = nullptr;
+	
+	CircleCollider* cA = nullptr;
+	CircleCollider* cB = nullptr;
+
+	Vec2 start, end, normal;
+	float depth = 0.0f;
+
+	Collision() = default;
+	~Collision() = default;
+
+	void resolveCollision();
+	void resolvePenetration();
+};

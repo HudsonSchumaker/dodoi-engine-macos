@@ -1,7 +1,7 @@
 /**
-* @file CircleCollider.h
+* @file Collision.cpp
 * @author Hudson Schumaker
-* @brief Defines the CircleCollider class.
+* @brief Implements the Collision class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -19,27 +19,18 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#pragma once
-#include "Component.h"
-#include "../../math/Vec2.h"
+#include "Collision.h"
 
-/**
- * @class CircleCollider
- * @brief A circle collider component.
- */
-class CircleCollider final : public Component {
-public:
-	Vec2 offset;
-	float radius = 0.0f;
+void Collision::resolveCollision() {
+	// Apply positional correction using the projection method
+	resolvePenetration();
+	// TODO: calculate the collision impulse
+}
 
-	CircleCollider() = default;
-	CircleCollider(const float radius) : radius(radius) {}
-	CircleCollider(float radius, Vec2 offset) : offset(offset), radius(radius) {}
-	CircleCollider(float radius, float offsetX, float offsetY) {
-		this->radius = radius;
-		this->offset.x = offsetX;
-		this->offset.y = offsetY;
-	}
+void Collision::resolvePenetration() {
+	float dA = depth / (rA->invMass + rB->invMass) * rA->invMass;
+	float dB = depth / (rA->invMass + rB->invMass) * rB->invMass;
 
-	~CircleCollider() = default;
-};
+	tA->position -= normal * dA;
+	tB->position += normal * dB;
+}
