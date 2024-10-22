@@ -24,7 +24,7 @@
 #include "Transform.h"
 #include "../../gfx/Gfx.h"
 #include "../../math/Vec2.h"
-
+#include "../EntityManager.h"
 /**
  * @class TextLabel
  * @brief The text label component.
@@ -40,6 +40,18 @@ public:
     SDL_Color color;
     int w = 0;
     int h = 0;
+
+    TextLabel(const std::string fontName, bool isFixed, std::string text, short size, SDL_Color color) {
+        this->fontName = fontName;
+        this->isFixed = isFixed;
+        this->text = text;
+        this->size = size;
+        this->position = { 0.0f, 0.0f };
+        this->color = color;
+
+        this->label = Gfx::getInstance()->createText(fontName, text, size, color);
+        SDL_QueryTexture(label, NULL, NULL, &w, &h);
+    }
 
     TextLabel(const std::string fontName, bool isFixed, Vec2 position, std::string text, short size, SDL_Color color) {
         this->fontName = fontName;
@@ -94,7 +106,7 @@ public:
     }
 
     void setOnCenterY() {
-       auto parent = EntityManager::getInstance()->getEntity(parentId);
+        auto parent = EntityManager::getInstance()->getEntity(parentId);
 	    auto transform = parent->getComponent<Transform>();
 	    if (transform) {
             auto bounds = Gfx::getInstance()->getTextureSize(label);

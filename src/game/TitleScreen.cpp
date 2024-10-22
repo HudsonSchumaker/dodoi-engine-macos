@@ -27,7 +27,9 @@
 #include "../engine/ecs/component/Waypoint.h"
 #include "../engine/ecs/component/RigidBody.h"
 #include "../engine/ecs/system/RenderSystem.h"
+#include "../engine/ecs/component/TextLabel.h"
 #include "../engine/ecs/system/PrimitiveRenderSystem.h"
+#include "../engine/ecs/system/RenderTextSystem.h"
 #include "../engine/ecs/system/WaypointNavigationSystem.h"
 
 TitleScreen::TitleScreen() : Scene() {
@@ -40,86 +42,9 @@ TitleScreen::~TitleScreen() {
 void TitleScreen::load() {
 	parallax = new ParallaxVertical("backyellow1280", "backkunai");
 	nextScene = "0";
-	logoTexture = Gfx::getInstance()->loadTexture("dodoi.png");
-	Dimension<int> size = Gfx::getInstance()->getTextureSize(logoTexture);
-	rect = {
-		Defs::SCREEN_H_WIDTH - (size.w / 2) - 20,  // x
-		Defs::SCREEN_H_HEIGHT - (size.h / 2) - 20, // y
-		size.w,                                    // w 
-		size.h                                     // h
-	};
-
-	//for (int i = 0; i < 100000; i++) {
-	//	auto entity = EntityManager::getInstance()->createEntity(1 + i * 2, 1 + i * 2, Tag::COIN);
-	//	entity->addComponent(new Box(30, 30, false, Color::getWhite()))->isFilled = false;
-	//	entity->layer = Layer::MIDDLEGROUND; // Set layer to BACKGROUND
-	//	entity->zIndex = i; // Set z-order
-	//}
-
-	//for (int i = 0; i < 100000; i++) {
-	//	auto entity = EntityManager::getInstance()->createEntity(10 + i * 10, 10 + i * 10, Tag::COIN);
-	//	entity->addComponent(new Box(30, 30, false, Color::getGold()))->isFilled = false;
-	//	entity->layer = Layer::BACKGROUND; // Set layer to BACKGROUND
-	//	entity->zIndex = i; // Set z-order
-	//}
-
-	for (int i = 0; i < 2; i++) {
-		auto a = EntityManager::getInstance()->createEntity(i, i, Tag::COIN);
-		a->addComponent(new Sprite("icon"));
-		a->layer = Layer::FOREGROUND; 
-		a->addComponent(new RigidBody(32.0f, 32.0f));
-		auto w = a->addComponent(new Waypoint({ 300, 456 }));
-		w->addPoint({ 100,600 });
-		w->addPoint({ 500,455 });
-		w->addPoint({ 300,100 });
-
-		auto b = EntityManager::getInstance()->createEntity(i, i, Tag::COIN);
-		b->addComponent(new Box(50, 50, false, Color::getMint()))->isFilled = true;
-		b->layer = Layer::MIDDLEGROUND; 
-		b->addComponent(new RigidBody(18.0f, 18.0f));
-		b->addComponent(new Waypoint({ 500,456 }));
-
-		auto c = EntityManager::getInstance()->createEntity(i, i, Tag::COIN);
-		c->addComponent(new Box(50, 50, false, Color::getBrown()))->isFilled = true;
-		c->layer = Layer::MIDDLEGROUND; 
-		c->addComponent(new RigidBody(18, 18));
-		c->addComponent(new Waypoint({ 900,100 }));
-
-		auto d = EntityManager::getInstance()->createEntity(i, i, Tag::COIN);
-		d->addComponent(new Circle(25, false, false, Color::getRed()))->isDashed = true;
-		d->layer = Layer::FOREGROUND; 
-		d->zIndex = 3; // Set z-order
-		d->addComponent(new RigidBody(18.0f, 18.0f));
-		d->addComponent(new Waypoint({ 456,399 }));
-	}
-
-	// Create a new box
-	auto a = EntityManager::getInstance()->createEntity(70, 67, Tag::COIN);
-	a->addComponent(new Box(50, 50, false, Color::getGray()))->isFilled = true;
-	a->layer = Layer::BACKGROUND; // Set layer to BACKGROUND
-	/*a->addComponent(new RigidBody(28.0f, 28.0f));
-	auto waypoint = a->addComponent(new Waypoint({300,456}));
-	waypoint->addPoint({ 100,200 });*/
-
-	auto b = EntityManager::getInstance()->createEntity(55, 55, Tag::COIN);
-	b->addComponent(new Box(50, 50, false, Color::getMagenta()))->isFilled = true;
-	b->layer = Layer::MIDDLEGROUND; // Set layer to BACKGROUND
-	b->zIndex = 1; // Set z-order
-	b->addComponent(new RigidBody(18.0f, 18.0f));
-	b->addComponent(new Waypoint({ 500,456 }));
-
-	auto c = EntityManager::getInstance()->createEntity(60, 60, Tag::COIN);
-	c->addComponent(new Box(50, 50, false, Color::getOrange()))->isFilled = true;
-	c->layer = Layer::MIDDLEGROUND; // Set layer to BACKGROUND
-	c->zIndex = 8; // Set z-order
-	c->addComponent(new RigidBody(18, 18));
-	c->addComponent(new Waypoint({ 900,100 }));
-
-	auto d = EntityManager::getInstance()->createEntity(100, 60, Tag::COIN);
-	d->addComponent(new Circle(25, false, false, Color::getPurple()))->isDashed = true;
-	d->layer = Layer::FOREGROUND; // Set layer to BACKGROUND
-	d->zIndex = 3; // Set z-order
-	d->addComponent(new RigidBody(18.0f, 18.0f));
+	auto entity = EntityManager::getInstance()->createEntity(450.0f, 450.0f);
+	auto label = entity->addComponent(new TextLabel("pico8.ttf", true, "Dodoi-Engine", 32, Color::getWhite()));
+	label->setOnScreenCenter();
 
 	isRunning = true;
 }
@@ -155,7 +80,7 @@ void TitleScreen::update() {
 void TitleScreen::render() {
 	beginRender();
 	{
-		parallax->render(renderer);
+		//parallax->render(renderer);
 
 		//SDL_RenderCopy(renderer, logoTexture, NULL, &rect);
 		PrimitiveRenderSystem render;
@@ -163,6 +88,9 @@ void TitleScreen::render() {
 
 		RenderSystem renderSystem;
 		renderSystem.update(&camera);
+
+		RenderTextSystem renderTextSystem;
+		renderTextSystem.update(&camera);
 
 	}
 	endRender();
