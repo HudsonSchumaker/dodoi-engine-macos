@@ -26,6 +26,8 @@
 /**
 * @class Gfx
 * @brief The graphics hanlder class.
+*
+* This class provides functionality for creating and manipulating graphics.
 */
 class Gfx final {
 private:

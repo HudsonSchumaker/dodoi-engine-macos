@@ -25,6 +25,8 @@
 /**
 * @class Color
 * @brief A class that represents a color.
+*
+* This class provides functionality for creating and manipulating colors.
 */
 class Color final {
 public:
