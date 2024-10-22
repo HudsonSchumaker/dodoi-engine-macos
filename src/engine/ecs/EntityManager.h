@@ -41,6 +41,7 @@ struct EntityComparator {
 class EntityManager final {
 private:
     unsigned long index = 0;
+    unsigned long playerId = 0;
     inline static EntityManager* instance = nullptr;
 
     std::vector<Entity*> entities;
