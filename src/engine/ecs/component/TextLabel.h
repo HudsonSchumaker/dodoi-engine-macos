@@ -23,8 +23,12 @@
 #include "Component.h"
 #include "Transform.h"
 #include "../../gfx/Gfx.h"
-#include "../../physics/Vec2.h"
+#include "../../math/Vec2.h"
 
+/**
+ * @class TextLabel
+ * @brief The text label component.
+ */
 class TextLabel final : public Component {
 public:
     std::string fontName;
@@ -75,8 +79,8 @@ public:
 	    auto transform = parent->getComponent<Transform>();
 	    if (transform) {
             auto bounds = Gfx::getInstance()->getTextureSize(label);
-            position.x = transform->position.x - (bounds.x/2);
-            position.y = transform->position.y - (bounds.y/2);
+            position.x = transform->position.x - (bounds.w/2);
+            position.y = transform->position.y - (bounds.h/2);
         }
     }
 
@@ -85,7 +89,7 @@ public:
 	    auto transform = parent->getComponent<Transform>();
 	    if (transform) {
             auto bounds = Gfx::getInstance()->getTextureSize(label);
-            position.x = transform->position.x - (bounds.x/2);
+            position.x = transform->position.x - (bounds.w/2);
         }
     }
 
@@ -94,24 +98,24 @@ public:
 	    auto transform = parent->getComponent<Transform>();
 	    if (transform) {
             auto bounds = Gfx::getInstance()->getTextureSize(label);
-            position.y = transform->position.y - (bounds.y/2);
+            position.y = transform->position.y - (bounds.h/2);
         }
     }
 
     void setOnScreenCenter() {
         auto bounds = Gfx::getInstance()->getTextureSize(label);
-        position.x = float(SCREEN_H_WIDTH - (bounds.x/2));
-        position.y = float(SCREEN_H_HEIGHT - (bounds.y/2));
+        position.x = float(Defs::SCREEN_H_WIDTH - (bounds.w/2));
+        position.y = float(Defs::SCREEN_H_HEIGHT - (bounds.h/2));
     }
 
     void setOnScreenCenterX() {
         auto bounds = Gfx::getInstance()->getTextureSize(label);
-        position.x = float(SCREEN_H_WIDTH - (bounds.x/2));
+        position.x = float(Defs::SCREEN_H_WIDTH - (bounds.w/2));
     }
 
     void setOnScreenCenterY() {
         auto bounds = Gfx::getInstance()->getTextureSize(label);
-        position.y = float(SCREEN_H_HEIGHT - (bounds.y/2));
+        position.y = float(Defs::SCREEN_H_HEIGHT - (bounds.h/2));
     }
 
     ~TextLabel() = default;

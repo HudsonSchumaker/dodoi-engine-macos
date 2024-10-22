@@ -21,7 +21,7 @@
 */
 #pragma once
 #include "Gfx.h"
-#include "../physics/Vec2.h"
+#include "../math/Vec2.h"
 #include "../ecs/component/Component.h"
 
 /**

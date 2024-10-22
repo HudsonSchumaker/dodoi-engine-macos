@@ -1,7 +1,7 @@
 /**
-* @file RadarSystem.h
+* @file RenderTextSystem.h
 * @author Hudson Schumaker
-* @brief Defines the RadarSystem class.
+* @brief Defines the RenderTextSystem class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -21,15 +21,22 @@
 */
 #pragma once
 #include "System.h"
+#include "../../core/Camera.h"
 
 /**
- * @class RadarSystem
- * @brief Responsible for calualate target entities for radar entities in the game.
+ * @class RenderTextSystem
+ * @brief Responsible for rendering text entities in the game.
+ * 
+ * The RenderTextSystem class is part of the game's rendering system. It collects all the text entities in the game and renders them to the screen.
  */
-class RadarSystem final : public System {
-public: 
-	RadarSystem() = default;
-	~RadarSystem() = default;
+class RenderTextSystem final : public System {
+private:
+	SDL_Renderer* renderer = nullptr;
+	void renderTextLabel(Camera* camera);
+	void renderSpriteText(Camera* camera);
 
-    void update();
+public:
+	RenderTextSystem();
+	~RenderTextSystem() = default;
+	void update(Camera* camera);
 };
