@@ -55,7 +55,7 @@ Entity* EntityManager::createEntity(const float x, const float y, Tag tag) {
 	auto entity = createEntity(x, y);
 	entity->tags.first = tag;
 
-	if (tag == Tag::player) {
+	if (tag == Tag::PLAYER) {
 		playerId = entity->id;
 	}
 
