@@ -41,16 +41,15 @@ void RenderTextSystem::renderTextLabel(Camera* camera) {
 	for (auto& entity : entities) {
 		TextLabel* textLabel = entity->getComponent<TextLabel>();
 		
-		if (textLabel) {
-			SDL_Rect dstRect = {
-				static_cast<int>(textLabel->position.x - (textLabel->isFixed ? 0 : camera->x)),
-				static_cast<int>(textLabel->position.y - (textLabel->isFixed ? 0 : camera->y)),
-				textLabel->w,
-				textLabel->h
-			};
+		// render
+		SDL_Rect dstRect = {
+			static_cast<int>(textLabel->position.x - (textLabel->isFixed ? 0 : camera->x)),
+			static_cast<int>(textLabel->position.y - (textLabel->isFixed ? 0 : camera->y)),
+			textLabel->w,
+			textLabel->h
+		};
 			
-			SDL_RenderCopy(renderer, textLabel->label, NULL, &dstRect);
-		}
+		SDL_RenderCopy(renderer, textLabel->label, NULL, &dstRect);
 	}
 }
 
@@ -61,21 +60,20 @@ void RenderTextSystem::renderSpriteText(Camera* camera) {
 		Transform* transform = entity->getComponent<Transform>();
 		SpriteText* spriteText = entity->getComponent<SpriteText>();
 
-		if (transform && spriteText) {
-			float newX = transform->position.x + spriteText->offSet.x;
-			float newY = transform->position.y + spriteText->offSet.y; 
+		// render
+		float newX = transform->position.x + spriteText->offSet.x;
+		float newY = transform->position.y + spriteText->offSet.y; 
 
-			spriteText->position.x = newX;
-			spriteText->position.y = newY;
+		spriteText->position.x = newX;
+		spriteText->position.y = newY;
 
-			SDL_Rect dstRect = {
-				static_cast<int>(spriteText->position.x - (spriteText->isFixed ? 0 : camera->x)),
-				static_cast<int>(spriteText->position.y - (spriteText->isFixed ? 0 : camera->y)),
-				spriteText->w,
-				spriteText->h
-			};
+		SDL_Rect dstRect = {
+			static_cast<int>(spriteText->position.x - (spriteText->isFixed ? 0 : camera->x)),
+			static_cast<int>(spriteText->position.y - (spriteText->isFixed ? 0 : camera->y)),
+			spriteText->w,
+			spriteText->h
+		};
 			
-			SDL_RenderCopy(renderer, spriteText->label, NULL, &dstRect);
-		}
+		SDL_RenderCopy(renderer, spriteText->label, NULL, &dstRect);
 	}
 }

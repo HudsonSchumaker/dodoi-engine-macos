@@ -19,7 +19,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 #include "CameraMovementSystem.h"
 #include "../component/Transform.h"
 #include "../component/CameraFollow.h"
@@ -30,29 +29,25 @@ void CameraMovementSystem::update(Map* map, Camera* camera) {
 
     // For each entity with CameraFollow component
 	for (auto& entity : entities) {
-        auto components = entity->getComponents<CameraFollow, Transform>();
-        CameraFollow* cameraFollow = std::get<0>(components); // Get the CameraFollow component
-        Transform* transform = std::get<1>(components);       // Get the Transform component 
+        Transform* transform = entity->getComponent<Transform>(); // Get the Transform component 
 
-        // If the entity has CameraFollow and Transform components
-		if (cameraFollow && transform) {
-			if (transform->position.x + (camera->w / 2) < map->mapWidth) {
-				camera->x = int(transform->position.x - Defs::SCREEN_H_WIDTH);
-			}
-
-			if (transform->position.y + (camera->h / 2) < map->mapHeight) {
-				camera->y = int(transform->position.y - Defs::SCREEN_H_HEIGHT);
-			}
-
-			// Keep camera rectangle view inside the screen limits
-			camera->x = camera->x < 0 ? 0 : camera->x;
-			camera->y = camera->y < 0 ? 0 : camera->y;
-			
-			camera->x = (camera->x + camera->w > map->mapWidth) ?
-				map->mapWidth - camera->w : camera->x;
-			
-			camera->y = (camera->y + camera->h > map->mapHeight) ?
-				map->mapHeight - camera->h : camera->y;
+        // calculate
+		if (transform->position.x + (camera->w / 2) < map->mapWidth) {
+			camera->x = int(transform->position.x - Defs::SCREEN_H_WIDTH);
 		}
+
+		if (transform->position.y + (camera->h / 2) < map->mapHeight) {
+			camera->y = int(transform->position.y - Defs::SCREEN_H_HEIGHT);
+		}
+
+		// Keep camera rectangle view inside the screen limits
+		camera->x = camera->x < 0 ? 0 : camera->x;
+		camera->y = camera->y < 0 ? 0 : camera->y;
+			
+		camera->x = (camera->x + camera->w > map->mapWidth) ?
+			map->mapWidth - camera->w : camera->x;
+			
+		camera->y = (camera->y + camera->h > map->mapHeight) ?
+			map->mapHeight - camera->h : camera->y;
 	}
 }

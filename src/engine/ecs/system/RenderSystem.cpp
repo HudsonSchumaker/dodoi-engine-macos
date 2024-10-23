@@ -188,8 +188,7 @@ void RenderSystem::renderAnimation(renderable_t& renderable, const Camera* camer
 			else { animation->currentFrame = 0; }
 		}
 
-		SDL_Rect origin = { animation->currentFrame * animation->getSize().w, 0,
-			animation->getSize().h, animation->getSize().h };
+		SDL_Rect origin = { animation->currentFrame * animation->getSize().w, 0, animation->getSize().h, animation->getSize().h };
 
 		SDL_FRect dest = { 0.0f, 0.0f, 0.0f, 0.0f };
 		dest.x = transform->position.x - (animation->isFixed ? 0 : camera->x);
@@ -245,8 +244,7 @@ void RenderSystem::renderAnimationController(renderable_t& renderable, const Cam
 			animation->currentFrame = 0;
 		}
 
-		SDL_Rect origin = { animation->currentFrame * animation->getSize().w, 0,
-			animation->getSize().h, animation->getSize().h };
+		SDL_Rect origin = { animation->currentFrame * animation->getSize().w, 0, animation->getSize().h, animation->getSize().h };
 
 		SDL_FRect dest = { 0.0f, 0.0f, 0.0f, 0.0f };
 		dest.x = transform->position.x - (animation->isFixed ? 0 : camera->x);

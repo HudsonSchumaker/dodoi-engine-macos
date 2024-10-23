@@ -42,8 +42,8 @@ void WaypointNavigationSystem::update(float dt) {
                 RigidBody* rigidBody = std::get<1>(components); // Get the RigidBody component
                 Transform* transform = std::get<2>(components); // Get the Transform component
 
-                // If the entity has a RigidBody, Transform, and Waypoints
-                if (rigidBody && transform && !points->waypoints.empty()) {
+                // If the entity has a RigidBody and Waypoints
+                if (rigidBody && !points->waypoints.empty()) {
                     // Get the current waypoint
                     auto currentWaypoint = points->waypoints.front();
 

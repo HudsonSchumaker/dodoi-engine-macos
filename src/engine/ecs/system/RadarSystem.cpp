@@ -25,32 +25,30 @@ void RadarSystem::update() {
                 Radar* radar = std::get<0>(components);         // Get the Radar component
                 Transform* transform = std::get<1>(components); // Get the Transform component    
 
-                // If the entity has Radar and Transform components
-                if (radar && transform) {
-                    float radarX = transform->position.x + radar->offset.x;
-                    float radarY = transform->position.y + radar->offset.y;
-                    float radarRadius = radar->r;
+                // calculate
+                float radarX = transform->position.x + radar->offset.x;
+                float radarY = transform->position.y + radar->offset.y;
+                float radarRadius = radar->r;
 
-                    auto enemies = EntityManager::getInstance()->getEntitiesWithTag(radar->tag);
-                    for (auto& enemy : enemies) {
-                        if (enemy->tags.first == radar->tag) {
-                            Transform* enemyTransform = enemy->getComponent<Transform>();
+                auto enemies = EntityManager::getInstance()->getEntitiesWithTag(radar->tag);
+                for (auto& enemy : enemies) {
+                    if (enemy->tags.first == radar->tag) {
+                        Transform* enemyTransform = enemy->getComponent<Transform>();
 
-                            // Calculate the distance between the radar and the other entity
-                            float dx = (enemyTransform->position.x + 24) - radarX;
-                            float dy = (enemyTransform->position.y + 24) - radarY;
-                            float distance = std::sqrtf(dx * dx + dy * dy);
+                        // Calculate the distance between the radar and the other entity
+                        float dx = (enemyTransform->position.x + 24) - radarX;
+                        float dy = (enemyTransform->position.y + 24) - radarY;
+                        float distance = std::sqrtf(dx * dx + dy * dy);
 
-                            // Check if the other entity is within the radar area
-                            Callback* callback = entity->getComponent<Callback>();
-                            if (callback) {
-                                if (distance <= radarRadius) {
-                                    callback->call(entity->id, enemy->id);
-                                    break;
-                                } else {
-                                    unsigned long id = 0; // No entity with id == 0
-                                    callback->call(entity->id, id);
-                                }
+                        // Check if the other entity is within the radar area
+                        Callback* callback = entity->getComponent<Callback>();
+                        if (callback) {
+                            if (distance <= radarRadius) {
+                                callback->call(entity->id, enemy->id);
+                                break;
+                            } else {
+                                unsigned long id = 0; // No entity with id == 0
+                                callback->call(entity->id, id);
                             }
                         }
                     }

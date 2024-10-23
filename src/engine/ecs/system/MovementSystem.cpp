@@ -45,15 +45,12 @@ void MovementSystem::update(float dt) {
                 RigidBody* rigidBody = std::get<0>(components); // Get the RigidBody component
                 Transform* transform = std::get<1>(components); // Get the Transform component
 
-                // If the entity has a RigidBody and Transform
-                if (rigidBody && transform) {
-                    // If the entity is not moving ignore it
-                    if (!rigidBody->isMoving) { continue; }
+                // If the entity is not moving ignore it
+                if (!rigidBody->isMoving) { continue; }
 
-                    // Update the position based on the velocity
-                    transform->position.x += rigidBody->velocity.x * dt;
-					transform->position.y += rigidBody->velocity.y * dt;
-                }
+                // Update the position based on the velocity
+                transform->position.x += rigidBody->velocity.x * dt;
+				transform->position.y += rigidBody->velocity.y * dt;
             }
         });
     }
