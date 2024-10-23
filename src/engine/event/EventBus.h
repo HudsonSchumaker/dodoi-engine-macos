@@ -1,7 +1,35 @@
+/**
+* @file EventBus.h
+* @author Hudson Schumaker
+* @brief Defines the EventBus class.
+* @version 1.0.0
+*
+* Dodoi-Engine is a game engine developed by Dodoi-Lab.
+* @copyright Copyright (c) 2024, Dodoi-Lab
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 #pragma once
-#include "../../Pch.h"
 #include "Event.h"
+#include "MouseClickEvent.h"
+#include "MouseHoverEvent.h"
+#include "MouseWheelEvent.h"
+#include "../../Pch.h"
 
+/**
+ * @class IEventCallback
+ * @brief The IEventCallback class is an interface that defines the call method for an event.
+ */
 class IEventCallback {
 private:
     virtual void call(Event& e) = 0;
@@ -14,6 +42,10 @@ public:
     }
 };
 
+/**
+ * @class EventCallback
+ * @brief The EventCallback class is a template class that is used to create a callback for an event.
+ */
 template <typename TOwner, typename TEvent>
 class EventCallback final : public IEventCallback {
 private:
@@ -36,14 +68,17 @@ public:
 };
 
 typedef std::list<std::unique_ptr<IEventCallback>> HandlerList;
-
-class EventBus {
+/**
+ * @class EventBus
+ * @brief The EventBus class is a singleton that manages the events of the game.
+ */
+class EventBus final {
 private:
     inline static EventBus* instance = nullptr;
     std::map<std::type_index, std::unique_ptr<HandlerList>> subscribers;
 
-    EventBus() {}
-    ~EventBus() {}
+    EventBus() = default;
+    ~EventBus() = default;
 
 public:
     static EventBus* getInstance() {
