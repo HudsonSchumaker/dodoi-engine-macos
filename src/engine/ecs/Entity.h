@@ -38,7 +38,7 @@ public:
 	Layer layer = Layer::MIDDLEGROUND;
 	std::pair<Tag, Tag> tags = { 
 		Tag::STANDARD,
-		Tag::KILLBYTIME
+		Tag::STANDARD
 	};
 
 	Entity(unsigned long id) : id(id) {}

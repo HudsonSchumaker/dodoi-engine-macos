@@ -22,6 +22,7 @@
 #pragma once
 #include "Component.h"
 #include "../../math/Vec2.h"
+#include "../../math/Dimension.h"
 
 /**
  * @class BoxCollider
@@ -30,15 +31,15 @@
 class BoxCollider final : public Component {
 public:
 	Vec2 offset;
-	Dimension bounds;
+	Dimension<short> bounds;
 
 	BoxCollider() = default;
-	BoxCollider(const short v) {
+	BoxCollider(short v) {
 		this->bounds.w = v;
 		this->bounds.h = v;
 	}
 	
-	BoxCollider(const short w, const short h) {
+	BoxCollider(short w, short h) {
 		this->bounds.w = w;
 		this->bounds.h = h;
 	}
@@ -50,11 +51,11 @@ public:
 		this->bounds.h = h;
 	}
 
-	BoxCollider(Dimension bounds) {
+	BoxCollider(Dimension<short> bounds) {
 		this->bounds = bounds;
 	}
 
-	BoxCollider(Dimension bounds, Vec2 offset) {
+	BoxCollider(Dimension<short> bounds, Vec2 offset) {
 		this->bounds = bounds;
 		this->offset = offset;
 	}
