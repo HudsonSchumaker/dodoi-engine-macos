@@ -35,7 +35,7 @@ private:
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
 
-    Gfx();
+    Gfx() = default;
 
 public:
     ~Gfx();

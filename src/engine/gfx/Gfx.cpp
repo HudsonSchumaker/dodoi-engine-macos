@@ -22,7 +22,6 @@
 #include "Gfx.h"
 #include "Color.h"
 
-Gfx::Gfx() {}
 Gfx::~Gfx() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
