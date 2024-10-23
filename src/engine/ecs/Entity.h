@@ -23,6 +23,7 @@
 #include "../../Pch.h"
 #include "TLG.h"
 #include "component/Component.h"
+#include "component/Transform.h"
 
 /**
 * @class Entity
@@ -41,7 +42,10 @@ public:
 		Tag::STANDARD
 	};
 
-	Entity(unsigned long id) : id(id) {}
+	Entity(unsigned long id, float x, float y) : id(id) {
+		addComponent(new Transform(x, y));
+	}
+
 	~Entity() {
 		deleteComponents();
 	}

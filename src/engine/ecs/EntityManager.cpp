@@ -20,7 +20,7 @@
 * limitations under the License.
 */
 #include "EntityManager.h"
-#include "../ecs/component/Transform.h"
+#include "component/Transform.h"
 #include "../gfx/Box.h"
 #include "../gfx/Line.h"
 #include "../gfx/Circle.h"
@@ -45,8 +45,7 @@ Entity* EntityManager::createEntity() {
 }
 
 Entity* EntityManager::createEntity(const float x, const float y) {
-	Entity* entity = new Entity(++index);
-	entity->addComponent(new Transform(x, y));
+	Entity* entity = new Entity(++index, x, y);
 	entities.push_back(entity);
 	return entity;
 }
