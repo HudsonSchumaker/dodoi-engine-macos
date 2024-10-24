@@ -24,16 +24,53 @@
 #include "../TLG.h"
 #include "../../math/Vec2.h"
 
+/**
+ * @class Radar
+ * @brief The Radar class is a component that allows to detect other entities within a certain radius.
+ */
 class Radar final : public Component {
 public:
+    typedef std::function<void(unsigned long, unsigned long)> OnDetectFunction;
     short r = 2; // radius
     Tag tag = Tag::ENEMY;
     Vec2 offset;
 
-    Radar(short radius) : r(radius) {}
-    Radar(short radius, Tag tag) : r(radius), tag(tag) {}
-    Radar(short radius, Vec2 offset) : r(radius), offset(offset) {}
-    Radar(short radius, Tag tag, Vec2 offset) : r(radius), tag(tag), offset(offset) {}
+    Radar(const OnDetectFunction& onDetect, short radius) {
+        this->callback = onDetect;
+        this->r = radius;
+    }
+
+    Radar(const OnDetectFunction& onDetect, short radius, Tag tag) {
+        this->callback = onDetect;
+        this->r = radius;
+        this->tag = tag;
+    }
+
+    Radar(const OnDetectFunction& onDetect, short radius, Vec2 offset) {
+        this->callback = onDetect;
+        this->r = radius;
+        this->offset = offset;
+    }
+
+    Radar(const OnDetectFunction& onDetect, short radius, Tag tag, Vec2 offset) {
+        this->callback = onDetect;
+        this->r = radius;
+        this->tag = tag;
+        this->offset = offset;
+    }
     
     ~Radar() = default;
+
+    void setOnDetect(const OnDetectFunction& onDetect) {
+        this->callback = onDetect;
+    }
+
+    void onDetect(unsigned long radar, unsigned long target) {
+        if (callback) {
+            callback(radar, target);
+        }
+    }
+
+private:
+    OnDetectFunction callback = nullptr;
 };

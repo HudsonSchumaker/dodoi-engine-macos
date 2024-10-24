@@ -41,15 +41,9 @@ void RadarSystem::update() {
                         float distance = std::sqrtf(dx * dx + dy * dy);
 
                         // Check if the other entity is within the radar area
-                        Callback* callback = entity->getComponent<Callback>();
-                        if (callback) {
-                            if (distance <= radarRadius) {
-                                callback->call(entity->id, enemy->id);
-                                break;
-                            } else {
-                                unsigned long id = 0; // No entity with id == 0
-                                callback->call(entity->id, id);
-                            }
+                        if (distance <= radarRadius) {
+                            radar->onDetect(entity->id, enemy->id);
+                            break;
                         }
                     }
                 }    
