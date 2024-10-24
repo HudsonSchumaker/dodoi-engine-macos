@@ -28,17 +28,19 @@ Scene::Scene() {
 
 // TODO: check if call SDL_GetTicks() 3 times is OK.
 float Scene::calculateDeltaTime() {
+    int currentTicks = SDL_GetTicks();
+
     // If we are too fast, waste some time until we reach the MILLISECS_PER_FRAME
-    int timeToWait = Defs::MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
+    int timeToWait = Defs::MILLISECS_PER_FRAME - (currentTicks - millisecsPreviousFrame);
     if (timeToWait > 0 && timeToWait <= Defs::MILLISECS_PER_FRAME) {
         SDL_Delay(timeToWait);
     }
 
     // The difference in ticks since the last frame, converted to seconds
-    deltaTime = (SDL_GetTicks() - millisecsPreviousFrame) / 1000.0f;
+    deltaTime = (currentTicks - millisecsPreviousFrame) / 1000.0f;
 
     // Store the "previous" frame time
-    millisecsPreviousFrame = SDL_GetTicks();
+    millisecsPreviousFrame = currentTicks;
     return deltaTime;
 }
 
