@@ -57,7 +57,7 @@ void Gfx::setGfxContext() {
         Defs::NAME,
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         Defs::SCREEN_WIDTH, Defs::SCREEN_HEIGHT,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL
+        SDL_WINDOW_SHOWN | SDL_WINDOW_METAL
     );
 
     if (window == nullptr) {
