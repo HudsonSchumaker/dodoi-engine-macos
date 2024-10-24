@@ -1,7 +1,7 @@
 /**
-* @file TitleScreen.h
+* @file Playground.h
 * @author Hudson Schumaker
-* @brief Defines the TitleScreen class.
+* @brief Defines the Playground class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -23,18 +23,30 @@
 #include "../engine/core/Scene.h"
 #include "../engine/core/ParallaxVertical.h"
 #include "../engine/ecs/system/WaypointNavigationSystem.h"
+#include "../engine/gfx/Box.h"
+#include "../engine/gfx/Circle.h"
+#include "../engine/gfx/Sprite.h"
+#include "../engine/ecs/EntityManager.h"
+#include "../engine/ecs/component/Waypoint.h"
+#include "../engine/ecs/component/RigidBody.h"
+#include "../engine/ecs/system/RenderSystem.h"
+#include "../engine/ecs/component/TextLabel.h"
+#include "../engine/ecs/system/PrimitiveRenderSystem.h"
+#include "../engine/ecs/system/RenderTextSystem.h"
+#include "../engine/ecs/system/WaypointNavigationSystem.h"
+#include "../engine/ecs/system/InputSystem.h"
+#include "../engine/ecs/system/GuiUpdateSystem.h"
 
 /**
-* @class TitleScreen
-* @brief The TitleScreen class.
+* @class Playground
+* @brief The Playground class.
 */
-class TitleScreen final : public Scene {
+class Playground final : public Scene {
 private:
-	SDL_Texture* logoTexture = nullptr;
-	SDL_Rect rect = { 0, 0, 0, 0 };
-
-	WaypointNavigationSystem* nav= nullptr;
-	ParallaxVertical* parallax = nullptr;
+	RenderSystem* renderSystem = nullptr;
+	RenderTextSystem* renderTextSystem = nullptr;
+	InputSystem* inputSystem = nullptr;
+	GuiUpdateSystem* guiUpdateSystem = nullptr;
 
 	void load() override;
 	void input() override;
@@ -43,8 +55,8 @@ private:
 	void unload() override;
 
 public:
-	TitleScreen();
-	~TitleScreen();
+	Playground();
+	~Playground();
 
 	short run() override;
 };

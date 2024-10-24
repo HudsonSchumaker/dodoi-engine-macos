@@ -1,7 +1,7 @@
 /**
-* @file TitleScreen.cpp
+* @file Playground.cpp
 * @author Hudson Schumaker
-* @brief Implements the TitleScreen class.
+* @brief Implements the Playground class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -19,37 +19,44 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#include "TitleScreen.h"
+#include "Playground.h"
 #include "../engine/gfx/Box.h"
 #include "../engine/gfx/Circle.h"
 #include "../engine/gfx/Sprite.h"
 #include "../engine/ecs/EntityManager.h"
 #include "../engine/ecs/component/Waypoint.h"
 #include "../engine/ecs/component/RigidBody.h"
-#include "../engine/ecs/system/RenderSystem.h"
-#include "../engine/ecs/component/TextLabel.h"
-#include "../engine/ecs/system/PrimitiveRenderSystem.h"
-#include "../engine/ecs/system/RenderTextSystem.h"
-#include "../engine/ecs/system/WaypointNavigationSystem.h"
+#include "../engine/ecs/component/Clickable.h"
+#include "../engine/ecs/component/BoxCollider.h"
 
-TitleScreen::TitleScreen() : Scene() {
-	nav = new WaypointNavigationSystem();
+Playground::Playground() : Scene() {
+	renderSystem = new RenderSystem();
+	renderTextSystem = new RenderTextSystem();
+	inputSystem = new InputSystem();
+	guiUpdateSystem = new GuiUpdateSystem();
 }
-TitleScreen::~TitleScreen() {
+
+Playground::~Playground() {
 	unload();
 }
 
-void TitleScreen::load() {
-	parallax = new ParallaxVertical("backyellow1280", "backkunai");
+void Playground::load() {
 	nextScene = "0";
 	auto entity = EntityManager::getInstance()->createEntity(450.0f, 450.0f);
-	auto label = entity->addComponent(new TextLabel("pico8.ttf", true, "Dodoi-Engine", 32, Color::getWhite()));
-	label->setOnScreenCenter();
+	entity->tags.first = Tag::UI;
+
+	auto sprite = entity->addComponent(new Sprite("avatarShadow"));
+
+	auto box = entity->addComponent(new BoxCollider(50, 50));
+	auto clickable = entity->addComponent(new Clickable([this](unsigned long entityID, int button) {
+		nextScene = "1";
+		isRunning = false;
+	}));
 
 	isRunning = true;
 }
 
-short TitleScreen::run() {
+short Playground::run() {
 	while (isRunning) {
 		input();
 		update();
@@ -58,7 +65,10 @@ short TitleScreen::run() {
 	return exit;
 }
 
-void TitleScreen::input() {
+void Playground::input() {
+
+	inputSystem->update();
+
 	SDL_Event sdlEvent;
 	while (SDL_PollEvent(&sdlEvent)) {
 		switch (sdlEvent.type) {
@@ -70,33 +80,22 @@ void TitleScreen::input() {
 	}
 }
 
-void TitleScreen::update() {
-	float dt = calculateDeltaTime();
+void Playground::update() {
+	//float dt = calculateDeltaTime();
 	
-	nav->update(dt);
-	parallax->update();
 }
 
-void TitleScreen::render() {
+void Playground::render() {
 	beginRender();
 	{
-		//parallax->render(renderer);
-
-		//SDL_RenderCopy(renderer, logoTexture, NULL, &rect);
-		PrimitiveRenderSystem render;
-		render.update(&camera);
-
-		RenderSystem renderSystem;
-		renderSystem.update(&camera);
-
-		RenderTextSystem renderTextSystem;
-		renderTextSystem.update(&camera);
+		renderSystem->update(&camera);
+		renderTextSystem->update(&camera);
 
 	}
 	endRender();
 }
 
-void TitleScreen::unload() {
+void Playground::unload() {
 	isLoaded = false;
-	SDL_DestroyTexture(logoTexture);
+	//SDL_DestroyTexture(logoTexture);
 }
