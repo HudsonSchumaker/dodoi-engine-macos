@@ -48,8 +48,11 @@ void WaypointNavigationSystem::update(float dt) {
                     auto currentWaypoint = points->waypoints.front();
 
                     // Calculate the direction vector
-                    float dx = (float)currentWaypoint.first - transform->position.x;
-                    float dy = (float)currentWaypoint.second - transform->position.y;
+                    float pointX = static_cast<float>(currentWaypoint.first);
+                    float pointY = static_cast<float>(currentWaypoint.second);
+
+                    float dx = pointX - transform->position.x;
+                    float dy = pointY - transform->position.y;
                     float distance = std::sqrtf(dx * dx + dy * dy);
                         
                     // Normalize the direction vector
@@ -57,7 +60,7 @@ void WaypointNavigationSystem::update(float dt) {
                     float directionY = dy / distance;
 
                     // Define an epsilon value for proximity check
-                    const float epsilon = 0.01f;
+                    const float epsilon = 0.2f;
 
                     // Check if the Entity has reached the Waypoint
                     if (distance <= epsilon) {

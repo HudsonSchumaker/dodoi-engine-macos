@@ -32,32 +32,22 @@
 class Clickable : public Component {
 public:
     typedef std::function<void(unsigned long, int)> Action;
-    short hover = 4;
+    short hover = 3;
     bool isHover = false;
     
-    Clickable() {
-        callback = nullptr;
-    }
-
     Clickable(const Action& action) {
-        callback = action;
+        this->callback = action;
     }
 
     Clickable(const Action& action, short hover) {
-        callback = action;
+        this->callback = action;
         this->hover = hover;
     }
     
-    Clickable(const Action& action, short hover, bool isHover) {
-        callback = action;
-        this->hover = hover;
-        this->isHover = isHover;
-    }
-
     ~Clickable() = default;
 
     void setAction(const Action& action) {
-       callback = action;
+       this->callback = action;
     }
 
     void onClick(unsigned long id, int value) {
@@ -72,7 +62,7 @@ public:
             Transform* parentTransform = parent->getComponent<Transform>();
             
             if (parentTransform) {
-                parentTransform->position.y -= hover;
+                parentTransform->position.y += hover;
                 isHover = true;
             }
         }
@@ -84,12 +74,12 @@ public:
             Transform* parentTransform = parent->getComponent<Transform>();
             
             if (parentTransform) {
-                parentTransform->position.y += hover;
+                parentTransform->position.y -= hover;
                 isHover = false;
             }
         }
     }
 
 private:
-    Action callback;
+    Action callback = nullptr;
 };

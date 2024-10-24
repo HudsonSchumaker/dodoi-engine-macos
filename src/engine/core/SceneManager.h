@@ -40,7 +40,7 @@ private:
     */
     std::map<std::string, std::unique_ptr<Scene>> scenes;
 
-    SceneManager();
+    SceneManager() = default;
     void displayLoadingScreen();
 
 public:

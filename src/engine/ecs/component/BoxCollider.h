@@ -45,8 +45,8 @@ public:
 	}
 
 	BoxCollider(float x, float y, short w, short h) {
-		offset.x = x;
-		offset.y = y;
+		this->offset.x = x;
+		this->offset.y = y;
 		this->bounds.w = w;
 		this->bounds.h = h;
 	}

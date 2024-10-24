@@ -50,7 +50,7 @@ protected:
     SDL_Renderer* renderer = nullptr;
     int millisecsPreviousFrame = 0;
     float deltaTime = 0.0f;
-    std::string nextScene = "TitleScreen";
+    std::string nextScene = "Playground"; // TODO: change to TitleScreen
 
     bool isRunning = false;
     bool isPaused = false;

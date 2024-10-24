@@ -36,7 +36,7 @@ public:
 	std::vector<std::pair<short, short>> waypoints;
 
 	Waypoint(std::pair<short, short> point) {
-		waypoints.push_back(point);
+		this->waypoints.push_back(point);
 	}
 
 	/**
@@ -48,6 +48,6 @@ public:
 	}
 	
 	~Waypoint() {
-		waypoints.clear();
+		this->waypoints.clear();
 	}
 };

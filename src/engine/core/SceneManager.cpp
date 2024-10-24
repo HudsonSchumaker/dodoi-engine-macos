@@ -20,7 +20,7 @@
 * limitations under the License.
 */
 #include "SceneManager.h"   
-SceneManager::SceneManager() {}
+
 SceneManager* SceneManager::getInstance() {
     if (instance == nullptr) {
         instance = new SceneManager();
