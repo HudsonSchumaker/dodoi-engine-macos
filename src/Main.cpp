@@ -21,7 +21,7 @@
 */
 #include "Main.h"
 #include "game/TitleScreen.h"
-#include "game/SplashScreen.h"
+#include "game/Playground.h"
 #include "engine/gfx/Gfx.h"
 #include "engine/sfx/Sfx.h"
 #include "engine/core/AssetManager.h"
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     setUp();
 
     SceneManager::getInstance()->addScene("SplashScreen", std::make_unique<SplashScreen>());
-    SceneManager::getInstance()->addScene("TitleScreen", std::make_unique<TitleScreen>());
+    SceneManager::getInstance()->addScene("Playground", std::make_unique<Playground>());
     SceneManager::getInstance()->loadSceneAsync("SplashScreen");
 
     quit();
