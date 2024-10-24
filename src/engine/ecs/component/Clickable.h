@@ -32,7 +32,7 @@
 class Clickable : public Component {
 public:
     typedef std::function<void(unsigned long, int)> Action;
-    short hover = 8;
+    short hover = 4;
     bool isHover = false;
     
     Clickable() {
