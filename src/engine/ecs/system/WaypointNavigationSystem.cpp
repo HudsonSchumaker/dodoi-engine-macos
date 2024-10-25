@@ -47,33 +47,41 @@ void WaypointNavigationSystem::update(float dt) {
                     // Get the current waypoint
                     auto currentWaypoint = points->waypoints.front();
 
-                    // Calculate the direction vector
-                    float pointX = static_cast<float>(currentWaypoint.first);
-                    float pointY = static_cast<float>(currentWaypoint.second);
+                    // Calculate the direction vector only if necessary
+                    if (points->direction.x == 0 && points->direction.y == 0) {
+                        float pointX = static_cast<float>(currentWaypoint.first);
+                        float pointY = static_cast<float>(currentWaypoint.second);
 
-                    float dx = pointX - transform->position.x;
-                    float dy = pointY - transform->position.y;
-                    float distance = std::sqrtf(dx * dx + dy * dy);
+                        float dx = pointX - transform->position.x;
+                        float dy = pointY - transform->position.y;
+                        float distance = std::sqrtf(dx * dx + dy * dy);
                         
-                    // Normalize the direction vector
-                    float directionX = dx / distance;
-                    float directionY = dy / distance;
+                        // Normalize the direction vector
+                        points->direction.x = dx / distance;
+                        points->direction.y = dy / distance;
+                    }
 
                     // Define an epsilon value for proximity check
                     const float epsilon = 0.2f;
 
                     // Check if the Entity has reached the Waypoint
+                    float dx = currentWaypoint.first - transform->position.x;
+                    float dy = currentWaypoint.second - transform->position.y;
+                    float distance = std::sqrtf(dx * dx + dy * dy);
                     if (distance <= epsilon) {
                         // Remove the current Waypoint from the list
                         points->waypoints.erase(points->waypoints.begin());
+                        // Reset the direction to force recalculation
+                        points->direction.x = 0;
+                        points->direction.y = 0;
                     } else {
                         // Calculate the movement distances based on the speeds and delta time
                         float movementDistanceX = rigidBody->velocity.x * dt;
                         float movementDistanceY = rigidBody->velocity.y * dt;
 
                         // Move the entity towards the waypoint
-                        transform->position.x += movementDistanceX * directionX;
-                        transform->position.y += movementDistanceY * directionY;
+                        transform->position.x += movementDistanceX * points->direction.x;
+                        transform->position.y += movementDistanceY * points->direction.y;
                     }
                 }
             }

@@ -21,6 +21,7 @@
 */
 #pragma once
 #include "Component.h"
+#include "../../math/Vec2.h"
 
 /**
 * @class Waypoint
@@ -28,6 +29,7 @@
 */
 class Waypoint final : public Component {
 public:
+	Vec2 direction;
 
 	/**
 	* @property waypoints A vector of tuples. Each tuple represents a waypoint and contains:
