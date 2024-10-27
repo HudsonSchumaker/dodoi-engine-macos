@@ -1,4 +1,3 @@
-
 /**
 * @file Clickable.h
 * @author Hudson Schumaker

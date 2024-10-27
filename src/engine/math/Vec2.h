@@ -56,7 +56,7 @@ public:
     * @return A vector pointing up.
     */
     static Vec2 up() {
-        return Vec2(0.0, -1.0f);
+        return Vec2(0.0f, -1.0f);
     }
 
     /**

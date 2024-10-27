@@ -192,3 +192,7 @@ void EntityManager::clear(Entity* entity) {
 		entities.erase(it);
 	}
 }
+
+long int EntityManager::getPlayerId() const {
+	return playerId;
+}

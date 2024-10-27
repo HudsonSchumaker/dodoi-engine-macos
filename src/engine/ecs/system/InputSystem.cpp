@@ -26,16 +26,8 @@
 #include "../component/Transform.h"
 #include "../component/BoxCollider.h"
 
-InputSystem::InputSystem() {
-
-}
-
-InputSystem::~InputSystem() {
-
-}
-
 void InputSystem::update() {
-    SDL_Event sdlEvent;
+    //SDL_Event sdlEvent;
     
     handleMouseInput();
     handleKeyboardInput();
@@ -81,11 +73,30 @@ void InputSystem::handleMouseInput() {
 }
 
 void InputSystem::handleKeyboardInput() {
-
+    SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+       if (sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP) {
+            if (keyboardCallback) {
+                if (sdlEvent.type == SDL_KEYDOWN) {
+                    keyboardCallback->onKeyPress(sdlEvent.key.keysym.sym);
+                } else {
+                    keyboardCallback->onKeyRelease(sdlEvent.key.keysym.sym);
+                }
+            }
+        }
+    }
 }
 
 void InputSystem::handleJoypadInput() {
 
+}
+
+void InputSystem::setKeyboardCallback(KeyboardEventCallback* callback) {
+    this->keyboardCallback = callback;
+}
+
+void InputSystem::setJoypadCallback(JoypadCallback callback) {
+    this->joypadCallback = callback;
 }
 
 bool InputSystem::isInside(const SDL_Rect& box1, const SDL_Rect& box2) const {

@@ -22,18 +22,18 @@
 #pragma once
 #include "System.h"
 #include "../../core/MousePointer.h"
+#include "../../core/KeyboardEventCallback.h"
 
 class InputSystem final : public System {
 public:
-    using KeyboardCallback = std::function<void(const Uint8*)>;
     using JoypadCallback = std::function<void(const Hardware::JoyPadTypes, const Hardware::JoyPadButtons)>;
 
-    InputSystem();
-    ~InputSystem();
+    InputSystem() = default;
+    ~InputSystem() = default;
 
     void update();
 
-    void setKeyboardCallback(KeyboardCallback callback);
+    void setKeyboardCallback(KeyboardEventCallback* callback);
     void setJoypadCallback(JoypadCallback callback);
 
 private:
@@ -43,6 +43,6 @@ private:
     bool isInside(const SDL_Rect& box1, const SDL_Rect& box2) const;
 
     MousePointer pointer;
-    KeyboardCallback keyboardCallback;
+    KeyboardEventCallback* keyboardCallback;
     JoypadCallback joypadCallback;
 };

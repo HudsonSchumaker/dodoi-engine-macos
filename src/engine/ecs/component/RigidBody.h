@@ -35,33 +35,32 @@ private:
     }
 
 public:
+    Vec2 speed;
     Vec2 velocity;
-    short dirX = 1;
-    short dirY = 0;
     float mass = 1.0f;
     float invMass = 1.0f;
     bool isMoving = true;
 
     RigidBody() = default;
     RigidBody(float x, float y) {
-        this->velocity.x = x;
-        this->velocity.y = y;
+        this->speed.x = x;
+        this->speed.y = y;
     }
 
     RigidBody(float x, float y, float mass) {
-        this->velocity.x = x;
-        this->velocity.y = y;
+        this->speed.x = x;
+        this->speed.y = y;
         this->mass = mass;
         init();
     }
 
-    RigidBody(Vec2 velocity) {
-        this->velocity = velocity;
+    RigidBody(Vec2 speed) {
+        this->speed = speed;
         init();
     }
 
-    RigidBody(Vec2 velocity, float mass) {
-        this->velocity = velocity;
+    RigidBody(Vec2 speed, float mass) {
+        this->speed = speed;
         this->mass = mass;
         init();
     }

@@ -165,4 +165,10 @@ public:
     * @param entity Pointer to the entity to clear.
     */
     void clear(Entity* entity);
+
+    /**
+     * @brief Returns the ID of the player entity.
+     * @return The ID of the player entity.
+     */
+    long int getPlayerId() const;
 };
