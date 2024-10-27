@@ -65,7 +65,7 @@
  */
 class Defs final {
 public:
-    inline static const char NAME[] = "Dodoi Engine v.0.60.9-macOS";
+    inline static const char NAME[] = "Dodoi Engine v.0.60.10-macOS";
 
     static const int FPS = 125;
     static const int MILLISECS_PER_FRAME = 1000 / FPS;
