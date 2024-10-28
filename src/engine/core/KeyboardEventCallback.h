@@ -1,4 +1,3 @@
-
 /**
 * @file KeyboardEventCallback.h
 * @author Hudson Schumaker
@@ -23,6 +22,10 @@
 #pragma once
 #include "../../Pch.h"
 
+/**
+ * @class KeyboardEventCallback
+ * @brief Keyboard event callback class.
+ */
 class KeyboardEventCallback {
 public:
     virtual void onKeyPress(int key) = 0;

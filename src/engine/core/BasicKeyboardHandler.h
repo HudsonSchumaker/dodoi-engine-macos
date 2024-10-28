@@ -34,6 +34,9 @@ public:
      */
     using KeyHandler = std::function<void()>;
 
+    BasicKeyboardHandler() = default;
+    ~BasicKeyboardHandler() = default;
+
     void onKeyPress(int key) override;
     void onKeyRelease(int key) override;
     void registerKeyPressHandler(int key, KeyHandler handler);
