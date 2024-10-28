@@ -1,7 +1,7 @@
 /**
-* @file BasicKeyboardHandler.cpp
+* @file Joypad.h
 * @author Hudson Schumaker
-* @brief Implements the BasicKeyboardHandler class.
+* @brief Defines the Joypad class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -19,26 +19,20 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#include "BasicKeyboardHandler.h"
 
-void BasicKeyboardHandler::onKeyPress(int key) {
-    auto it = keyPressHandlers.find(key);
-    if (it != keyPressHandlers.end()) {
-        it->second();
-    }
-}
+#pragma once
+#include "Component.h"
+#include "../../math/Vec2.h"
 
-void BasicKeyboardHandler::onKeyRelease(int key) {
-    auto it = keyReleaseHandlers.find(key);
-    if (it != keyReleaseHandlers.end()) {
-        it->second();
-    }
-}
+/**
+* @class Joypad
+* @brief Defines the Joypad component.
+*/
+class Joypad : public Component {
+public:
+    Vec2 direction;
+    int joypadId;
 
-void BasicKeyboardHandler::registerKeyPressHandler(int key, KeyHandler handler) {
-    keyPressHandlers[key] = handler;
-}
-
-void BasicKeyboardHandler::registerKeyReleaseHandler(int key, KeyHandler handler) {
-    keyReleaseHandlers[key] = handler;
-}
+    Joypad(int id) : joypadId(id), direction(Vec2::zero()) {}
+    ~Joypad() = default;
+};

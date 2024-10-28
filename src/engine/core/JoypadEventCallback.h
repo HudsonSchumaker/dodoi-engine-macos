@@ -1,7 +1,7 @@
 /**
-* @file BasicKeyboardHandler.cpp
+* @file JoypadEventCallback.h
 * @author Hudson Schumaker
-* @brief Implements the BasicKeyboardHandler class.
+* @brief Defines the JoypadEventCallback class.
 * @version 1.0.0
 *
 * Dodoi-Engine is a game engine developed by Dodoi-Lab.
@@ -19,26 +19,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-#include "BasicKeyboardHandler.h"
+#pragma once
+#include "../../Pch.h"
 
-void BasicKeyboardHandler::onKeyPress(int key) {
-    auto it = keyPressHandlers.find(key);
-    if (it != keyPressHandlers.end()) {
-        it->second();
-    }
-}
-
-void BasicKeyboardHandler::onKeyRelease(int key) {
-    auto it = keyReleaseHandlers.find(key);
-    if (it != keyReleaseHandlers.end()) {
-        it->second();
-    }
-}
-
-void BasicKeyboardHandler::registerKeyPressHandler(int key, KeyHandler handler) {
-    keyPressHandlers[key] = handler;
-}
-
-void BasicKeyboardHandler::registerKeyReleaseHandler(int key, KeyHandler handler) {
-    keyReleaseHandlers[key] = handler;
-}
+/**
+ * @class JoypadEventCallback
+ * @brief Joypad event callback class.
+ */
+class JoypadEventCallback {
+public:
+    virtual void onJoypadButtonPress(int joypadIndex, int button) = 0;
+    virtual void onJoypadButtonRelease(int joypadIndex, int button) = 0;
+    virtual void onJoypadAxisMotion(int joypadIndex, int axis, int value) = 0;
+};
