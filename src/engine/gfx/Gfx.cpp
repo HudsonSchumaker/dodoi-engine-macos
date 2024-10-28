@@ -81,6 +81,8 @@ void Gfx::setGfxContext() {
     SDL_JoystickEventState(SDL_ENABLE);
     SDL_JoystickOpen(0);
     SDL_JoystickOpen(1);
+    SDL_JoystickOpen(2);
+    SDL_JoystickOpen(3);
 }
 
 SDL_Window* Gfx::getWindow() {
