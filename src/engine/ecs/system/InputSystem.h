@@ -23,26 +23,26 @@
 #include "System.h"
 #include "../../core/MousePointer.h"
 #include "../../core/KeyboardEventCallback.h"
+#include "../../core/JoypadEventCallback.h"
 
 class InputSystem final : public System {
 public:
-    using JoypadCallback = std::function<void(const Hardware::JoyPadTypes, const Hardware::JoyPadButtons)>;
-
     InputSystem() = default;
     ~InputSystem() = default;
 
     void update();
 
     void setKeyboardCallback(KeyboardEventCallback* callback);
-    void setJoypadCallback(JoypadCallback callback);
+    void setJoypadCallback(JoypadEventCallback* callback);
 
 private:
-    void handleMouseInput();
-    void handleKeyboardInput();
-    void handleJoypadInput();
+    void handleMouseInput(const SDL_Event& sdlEvent);
+    void handleKeyboardInput(const SDL_Event& sdlEvent);
+    void handleJoypadInput(const SDL_Event& sdlEvent);
+    
     bool isInside(const SDL_Rect& box1, const SDL_Rect& box2) const;
 
     MousePointer pointer;
     KeyboardEventCallback* keyboardCallback;
-    JoypadCallback joypadCallback;
+    JoypadEventCallback* joypadCallback;
 };

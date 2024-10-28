@@ -27,16 +27,38 @@
 #include "../component/BoxCollider.h"
 
 void InputSystem::update() {
-    //SDL_Event sdlEvent;
-    
-    handleMouseInput();
-    handleKeyboardInput();
-    handleJoypadInput();
+    SDL_Event sdlEvent;
+    while (SDL_PollEvent(&sdlEvent)) {
+        switch (sdlEvent.type) {
+            case SDL_MOUSEMOTION:
+            case SDL_MOUSEBUTTONDOWN:
+            case SDL_MOUSEBUTTONUP:
+                handleMouseInput(sdlEvent);
+                break;
+            case SDL_KEYDOWN:
+            case SDL_KEYUP:
+                handleKeyboardInput(sdlEvent);
+                break;
+            case SDL_JOYBUTTONDOWN:
+            case SDL_JOYBUTTONUP:
+            case SDL_JOYAXISMOTION:
+                handleJoypadInput(sdlEvent);
+                break;
+        }
+    }
 }
 
-void InputSystem::handleMouseInput() {
+void InputSystem::handleMouseInput(const SDL_Event& sdlEvent) {
     auto entities = EntityManager::getInstance()->getEntitiesWithComponent<Clickable>();
-    auto mouseState = SDL_GetMouseState(&pointer.x , &pointer.y);
+
+    // Update the mouse pointer position based on the event type
+    if (sdlEvent.type == SDL_MOUSEMOTION) {
+        pointer.x = sdlEvent.motion.x;
+        pointer.y = sdlEvent.motion.y;
+    } else if (sdlEvent.type == SDL_MOUSEBUTTONDOWN || sdlEvent.type == SDL_MOUSEBUTTONUP) {
+        pointer.x = sdlEvent.button.x;
+        pointer.y = sdlEvent.button.y;
+    }
 
 	for (auto& entity : entities) {
         auto components = entity->getComponents<Clickable, BoxCollider, Transform>();
@@ -56,15 +78,15 @@ void InputSystem::handleMouseInput() {
             EventBus::getInstance()->emitEventAsync<MouseHoverEvent>(entity, isHovering);
 
             if (isHovering) {
-                if (mouseState & SDL_BUTTON(SDL_BUTTON_LEFT)) {
+                if (sdlEvent.button.button == SDL_BUTTON_LEFT) {
                     clickable->onClick(entity->id, static_cast<int>(MouseButton::LEFT));
                     continue;
                 }
-                if (mouseState & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
+                if (sdlEvent.button.button == SDL_BUTTON_RIGHT) {
                     clickable->onClick(entity->id, static_cast<int>(MouseButton::RIGHT));
                     continue;
                 }
-                if (mouseState & SDL_BUTTON(SDL_BUTTON_MIDDLE)) {
+                if (sdlEvent.button.button == SDL_BUTTON_MIDDLE) {
                     clickable->onClick(entity->id, static_cast<int>(MouseButton::MIDDLE));
                 }
             }
@@ -72,30 +94,44 @@ void InputSystem::handleMouseInput() {
     }
 }
 
-void InputSystem::handleKeyboardInput() {
-    SDL_Event sdlEvent;
-    while (SDL_PollEvent(&sdlEvent)) {
-       if (sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP) {
-            if (keyboardCallback) {
-                if (sdlEvent.type == SDL_KEYDOWN) {
-                    keyboardCallback->onKeyPress(sdlEvent.key.keysym.sym);
-                } else {
-                    keyboardCallback->onKeyRelease(sdlEvent.key.keysym.sym);
-                }
-            }
+void InputSystem::handleKeyboardInput(const SDL_Event& sdlEvent) {
+    if (keyboardCallback) {
+        if (sdlEvent.type == SDL_KEYDOWN) {
+            keyboardCallback->onKeyPress(sdlEvent.key.keysym.sym);
+        } else {
+            keyboardCallback->onKeyRelease(sdlEvent.key.keysym.sym);
         }
     }
 }
 
-void InputSystem::handleJoypadInput() {
+void InputSystem::handleJoypadInput(const SDL_Event& sdlEvent) {
+    if (joypadCallback) {
+        int joypadIndex = sdlEvent.jaxis.which; // Default to axis event
 
+        if (sdlEvent.type == SDL_JOYAXISMOTION) {
+            joypadIndex = sdlEvent.jaxis.which;
+            joypadCallback->onJoypadAxisMotion(joypadIndex, sdlEvent.jaxis.axis, sdlEvent.jaxis.value);
+            return;
+        }
+
+        if (sdlEvent.type == SDL_JOYBUTTONDOWN) {
+            joypadIndex = sdlEvent.jbutton.which;
+            joypadCallback->onJoypadButtonPress(joypadIndex, sdlEvent.jbutton.button);
+            return;
+        } 
+        
+        if (sdlEvent.type == SDL_JOYBUTTONUP) {
+            joypadIndex = sdlEvent.jbutton.which;
+            joypadCallback->onJoypadButtonRelease(joypadIndex, sdlEvent.jbutton.button);
+        } 
+    }
 }
 
 void InputSystem::setKeyboardCallback(KeyboardEventCallback* callback) {
     this->keyboardCallback = callback;
 }
 
-void InputSystem::setJoypadCallback(JoypadCallback callback) {
+void InputSystem::setJoypadCallback(JoypadEventCallback* callback) {
     this->joypadCallback = callback;
 }
 
