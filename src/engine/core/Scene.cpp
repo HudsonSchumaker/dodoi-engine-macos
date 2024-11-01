@@ -28,10 +28,10 @@ Scene::Scene() {
 
 float Scene::calculateDeltaTime() {
     // Get the current number of ticks since SDL initialization
-    int currentTicks = SDL_GetTicks();
+    long currentTicks = SDL_GetTicks64();
 
     // Calculate the time difference since the last frame (in milliseconds)
-    int frameTime = currentTicks - millisecsPreviousFrame;
+    long frameTime = currentTicks - millisecsPreviousFrame;
 
     // If we are too fast, wait until we reach the desired frame time
     if (frameTime < Defs::MILLISECS_PER_FRAME) {
@@ -67,7 +67,7 @@ void Scene::waitForLoad() {
     if (loadFuture.valid()) {
         loadFuture.get();
         isLoaded = true;
-        millisecsPreviousFrame = SDL_GetTicks();
+        millisecsPreviousFrame = SDL_GetTicks64();
     }
 }
 

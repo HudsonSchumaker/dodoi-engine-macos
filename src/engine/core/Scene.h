@@ -48,7 +48,7 @@ private:
 protected:
     Camera camera = { 0, 0, Defs::SCREEN_WIDTH, Defs::SCREEN_HEIGHT };
     SDL_Renderer* renderer = nullptr;
-    int millisecsPreviousFrame = 0;
+    long millisecsPreviousFrame = 0;
     float deltaTime = 0.0f;
     std::string nextScene = "Playground"; // TODO: change to TitleScreen
 
