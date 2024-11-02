@@ -23,7 +23,10 @@
 #include "System.h"
 #include "../../event/MouseHoverEvent.h"
 
-
+/**
+ * @class GuiUpdateSystem
+ * @brief System for updating the GUI.
+ */
 class GuiUpdateSystem final : public System {
 private:
     void subscribeToEvents();

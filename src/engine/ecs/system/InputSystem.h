@@ -25,6 +25,10 @@
 #include "../../core/KeyboardEventCallback.h"
 #include "../../core/JoypadEventCallback.h"
 
+/**
+ * @class InputSystem
+ * @brief System for handling input.
+ */
 class InputSystem final : public System {
 public:
     InputSystem() = default;

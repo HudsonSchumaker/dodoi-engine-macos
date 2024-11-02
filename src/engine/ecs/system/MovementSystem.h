@@ -22,6 +22,10 @@
 #pragma once
 #include "System.h"
 
+/**
+ * @class MovementSystem
+ * @brief System for handling movement.
+ */
 class MovementSystem final : public System {
 public:
 	MovementSystem() = default;
