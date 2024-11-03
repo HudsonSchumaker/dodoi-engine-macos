@@ -65,6 +65,8 @@ void Gfx::setGfxContext() {
         return;
     }
 
+    // SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+
     std::string icon = "icon.png";
     auto path = IMAGE_FOLDER + icon;
     SDL_Surface* iconSurface = IMG_Load(path.c_str());
