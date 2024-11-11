@@ -136,6 +136,13 @@ public:
     static void changeColorIntensity(Uint32* color, float factor);
 
     /**
+     * @brief Converts an int to a float for OpenGL.
+     * @param color value to convert.
+     * @return The converted float.
+     */
+    static float intToFloatOpenGLColor(int color);
+
+    /**
     * @brief Returns an SDL_Color representing red.
     * @return An SDL_Color representing red.
     */

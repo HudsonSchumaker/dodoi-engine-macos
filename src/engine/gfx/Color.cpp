@@ -89,6 +89,10 @@ void Color::changeColorIntensity(Uint32* color, float factor) {
     *color = a | ((r & 0x000000FF) << 16) | ((g & 0x000000FF) << 8) | (b & 0x000000FF);
 }
 
+float Color::intToFloatOpenGLColor(int color) {
+    return (1.0f / 255.0f) * color;
+}
+
 SDL_Color Color::getRed() {
     SDL_Color red = { 255, 0, 0, 255 };
     return red;
