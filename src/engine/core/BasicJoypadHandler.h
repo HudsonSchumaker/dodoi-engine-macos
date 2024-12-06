@@ -1,5 +1,5 @@
 /**
-* @file BasicKeyboardHandler.h
+* @file BasicJoypadHandler.h
 * @author Hudson Schumaker
 * @brief Defines the BasicKeyboardHandler class.
 * @version 1.0.0
