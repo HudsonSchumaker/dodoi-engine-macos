@@ -50,7 +50,10 @@ void SceneManager::loadSceneAsync(const std::string& sceneName) {
 
     // Wait for the scene to finish loading
     scene->waitForLoad();
-    scene->run();
+    auto exitCode = scene->run();
+    if (exitCode == -1) {
+	    return;
+    }   
 
     // Load the next scene
     std::string nextSceneName = scene->getNextScene();
