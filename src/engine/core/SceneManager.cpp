@@ -52,7 +52,7 @@ void SceneManager::loadSceneAsync(const std::string& sceneName) {
     scene->waitForLoad();
     auto exitCode = scene->run();
     if (exitCode == -1) {
-	    return;
+	return;
     }   
 
     // Load the next scene
