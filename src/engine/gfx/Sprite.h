@@ -38,6 +38,7 @@ public:
 	bool flipX = false;
 	bool flipY = false;
 	bool isFixed = false;
+	bool renderable = true;
 	SDL_Texture* texture = nullptr;
 
 	Sprite(const std::string& name);
