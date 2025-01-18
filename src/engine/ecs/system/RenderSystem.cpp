@@ -119,6 +119,10 @@ void RenderSystem::renderSprite(renderable_t& renderable, const Camera* camera) 
 	Transform* transform = std::get<1>(renderable);
 	Sprite* sprite = entity->getComponent<Sprite>();
 
+	if (!sprite->renderable) {
+		return;
+	}
+
 	bool isOutsideCameraView = (
 		transform->position.x + (transform->scale.x * sprite->w) < camera->x ||
 		transform->position.x > camera->x + camera->w ||
